@@ -81,7 +81,7 @@ end;
 /
 ````
 
-Create a resource plan directive, having parameter SWITCH_GROUP value CANCEL_SQL. If group name is CANCEL_SQL, then the current call is canceled when the switch condition is met. If the group name is KILL_SESSION, then the session is killed when the switch condition is met. If the group name is LOG_ONLY, then no action is taken other than recording this event via SQL monitor. Parameter SWITCH_TIME specifies the time on CPU (not elapsed time) that a session can execute before the action is taken. We set it to 30 seconds. Parameter SWITCH_ESTIMATE, if TRUE, tells Oracle to use its execution time estimate to automatically switch the consumer group of an operation before beginning its execution.
+Create a resource plan directive, having parameter `SWITCH_GROUP` value `CANCEL_SQL`. If group name is `CANCEL_SQL`, then the current call is canceled when the switch condition is met. If the group name is `KILL_SESSION`, then the session is killed when the switch condition is met. If the group name is `LOG_ONLY`, then no action is taken other than recording this event via SQL monitor. Parameter `SWITCH_TIME` specifies the time on CPU (not elapsed time) that a session can execute before the action is taken. We set it to 30 seconds. Parameter `SWITCH_ESTIMATE`, if TRUE, tells Oracle to use its execution time estimate to automatically switch the consumer group of an operation before beginning its execution.
 
 ````
 begin
@@ -97,9 +97,9 @@ end;
 /
 ````
 
-Create another resource plan directive for OTHER_GROUPS - all sessions that aren't mapped to a consumer group. Parameter MGMT_P1 specifies the resource percentage at the first level - resource allocation value for level 1. In this case it give 100% of CPU to other sessions not mapped to our EXEC_LIMIT_GROUP consumer group.
+Create another resource plan directive for `OTHER_GROUPS` - all sessions that aren't mapped to a consumer group. Parameter `MGMT_P1` specifies the resource percentage at the first level - resource allocation value for level 1. In this case it give 100% of CPU to other sessions not mapped to our `EXEC_LIMIT_GROUP` consumer group.
 
->**Note** : There must be a plan directive for OTHER_GROUPS somewhere in any active plan schema.This ensures that a session not covered by the currently active plan is allocated resources as specified by the OTHER_GROUPS directive.
+>**Note** : There must be a plan directive for `OTHER_GROUPS` somewhere in any active plan schema.This ensures that a session not covered by the currently active plan is allocated resources as specified by the `OTHER_GROUPS` directive.
 
 ````
 begin
@@ -183,7 +183,7 @@ Now we will set some limits for the queries that user UNAUTH is allowed to execu
 
 ### Connection 1: SYS
 
-Use the first connection to the pluggable database as SYS user. V$SESSION view displays session information for each current session. Observe the value of the RESOURCE_CONSUMER_GROUP column.
+Use the first connection to the pluggable database as SYS user. V$SESSION view displays session information for each current session. Observe the value of the `RESOURCE_CONSUMER_GROUP` column.
 
 ````
 set linesize 130
@@ -197,7 +197,7 @@ select  SID, SERIAL#, USERNAME, RESOURCE_CONSUMER_GROUP from V$SESSION where USE
 	36	11196 UNAUTH			     OTHER_GROUPS
 ````
 
-DBA_RSRC_GROUP_MAPPINGS view displays the mapping between session attributes and consumer groups in the database. UNAUTH is mapped to EXEC_LIMIT_GROUP consumer group.
+`DBA_RSRC_GROUP_MAPPINGS` view displays the mapping between session attributes and consumer groups in the database. UNAUTH is mapped to `EXEC_LIMIT_GROUP` consumer group.
 
 ````
 col ATTRIBUTE format a25
@@ -212,7 +212,7 @@ ATTRIBUTE		  VALUE 		    CONSUMER_GROUP	      STATUS
 ORACLE_USER		  UNAUTH		    EXEC_LIMIT_GROUP
 ````
 
-RESOURCE_MANAGER_PLAN initialization parameter specifies the resource plan to use for a database. Set this parameter to the plan we create previously.
+`RESOURCE_MANAGER_PLAN` initialization parameter specifies the resource plan to use for a database. Set this parameter to the plan we create previously.
 
 ````
 alter system set resource_manager_plan = 'CPU_TIME_LIMIT';
@@ -220,7 +220,7 @@ alter system set resource_manager_plan = 'CPU_TIME_LIMIT';
 
 ## Step 5: Test Execution Limits 
 
-Now we have Oracle Database Resource Manager to prevent such a long running query to be executed. Resource plan directive, having parameter SWITCH_GROUP value CANCEL_SQL will cancel the current call after 30 seconds.
+Now we have Oracle Database Resource Manager to prevent such a long running query to be executed. Resource plan directive, having parameter `SWITCH_GROUP` value `CANCEL_SQL` will cancel the current call after 30 seconds.
 
 ### Connection 2: UNAUTH
 
@@ -239,7 +239,7 @@ Elapsed: 00:00:31.96
 
 ### Connection 1: SYS
 
-Use the first connection to the pluggable database as SYS user. Observe again the RESOURCE_CONSUMER_GROUP column in V$SESSION view.
+Use the first connection to the pluggable database as SYS user. Observe again the `RESOURCE_CONSUMER_GROUP` column in V$SESSION view.
 
 ````
 select SID, SERIAL#, USERNAME, RESOURCE_CONSUMER_GROUP from V$SESSION where USERNAME='UNAUTH';
@@ -253,7 +253,7 @@ It confirms user UNAUTH was mapped correctly with the corresponding consumer gro
 
 ## Step 6: SQL Quarantine Setup 
 
-V$SQL view lists statistics on shared SQL areas. SQL_ID is the SQL identifier of the parent cursor in the library cache. PLAN_HASH_VALUE is the numeric representation of the current SQL plan for this cursor. We need these two values to configure SQL Quarantine.
+V$SQL view lists statistics on shared SQL areas. `SQL_ID` is the SQL identifier of the parent cursor in the library cache. `PLAN_HASH_VALUE` is the numeric representation of the current SQL plan for this cursor. We need these two values to configure SQL Quarantine.
 
 ````
 select SQL_ID, PLAN_HASH_VALUE from V$SQL where SQL_TEXT = 'SELECT count(*) FROM my_report r1, my_report r2 WHERE r1.c=r2.c AND r1.c=1';
@@ -263,7 +263,7 @@ SQL_ID	      PLAN_HASH_VALUE
 ant1c7jnqf8yu	   1413800128
 ````
 
-You can create a quarantine configuration for an execution plan of a SQL statement using any of these DBMS_SQLQ package functions – CREATE_QUARANTINE_BY_SQL_ID or CREATE_QUARANTINE_BY_SQL_TEXT. 
+You can create a quarantine configuration for an execution plan of a SQL statement using any of these `DBMS_SQLQ` package functions – `CREATE_QUARANTINE_BY_SQL_ID` or `CREATE_QUARANTINE_BY_SQL_TEXT`. 
 
 ````
 declare
@@ -274,7 +274,7 @@ end;
 /
 ````
 
-Query the DBA_SQL_QUARANTINE view to get details of all the quarantine configurations.
+Query the `DBA_SQL_QUARANTINE` view to get details of all the quarantine configurations.
 
 ````
 col SQL_TEXT format a30
@@ -316,7 +316,7 @@ It is terminated in .01 seconds.
 
 Use the first connection to the pluggable database as SYS user.
 
-You can query the V$SQL and GV$SQL views to get details about the quarantined execution plans of SQL statements. SQL_QUARANTINE column contains the name of the SQL quarantine configuration, and AVOIDED_EXECUTIONS the number of times this cursor was prevented from being used due to the plan being quarantined.
+You can query the V$SQL and GV$SQL views to get details about the quarantined execution plans of SQL statements. `SQL_QUARANTINE` column contains the name of the SQL quarantine configuration, and `AVOIDED_EXECUTIONS` the number of times this cursor was prevented from being used due to the plan being quarantined.
 
 ````
 col SQL_QUARANTINE format a40
@@ -328,7 +328,7 @@ SQL_QUARANTINE				 AVOIDED_EXECUTIONS
 SQL_QUARANTINE_7quzzzhxrb2hg				  1
 ````
 
-You can query a quarantine threshold for a quarantine configuration using the DBMS_SQLQ.GET_PARAM_VALUE_QUARANTINE function. The following example returns the quarantine threshold for elapsed time for the quarantine configuration. When a specific value is not specified, quarantines have thresholds set to ALWAYS.
+You can query a quarantine threshold for a quarantine configuration using the `DBMS_SQLQ.GET_PARAM_VALUE_QUARANTINE` function. The following example returns the quarantine threshold for elapsed time for the quarantine configuration. When a specific value is not specified, quarantines have thresholds set to ALWAYS.
 
 ````
 declare
@@ -344,7 +344,7 @@ end;
 SQL quarantined parameter is: ALWAYS
 ````
 
-You can enable or disable a quarantine configuration using the DBMS_SQLQ.ALTER_QUARANTINE procedure. A quarantine configuration is enabled by default when it is created. 
+You can enable or disable a quarantine configuration using the `DBMS_SQLQ.ALTER_QUARANTINE` procedure. A quarantine configuration is enabled by default when it is created. 
 
 ## Acknowledgements
 
