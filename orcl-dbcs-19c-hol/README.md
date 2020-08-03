@@ -28,7 +28,7 @@ Alternatively, you can follow the labs on this repo :
 - [Database Cloud Service Backup & Recovery](./bkup-recovery/bkup-recovery.md)
 - [Data Guard Physical Standby Database](./dataguard/dataguard.md)
 - [Database Service Patching](./patching/patching.md)
-- [Oracle Database Command Line Interface - DBCLI](./dbcli/dbcli.md
+- [Oracle Database Command Line Interface (DBCLI)](./dbcli/dbcli.md)
 - [Memoptimized Rowstore Fast Ingest](./memoptimize/memoptimize.md)
 - [Resource Manager and SQL Quarantine](./quarantine/quarantine.md)
 
