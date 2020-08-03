@@ -85,13 +85,17 @@ The key fingerprint is:
 
 Now you are ready to upload the public key to the Oracle Database Cloud Server when creating the instance.
 
-
 ## Agenda
 
 - **Lab 1 : Oracle Cloud Infrastructure (OCI)**
-- **Lab 2 : Prepare Sandbox Pluggable Database**
-- **Lab 3 : Memoptimized Rowstore Fast Ingest**
-- **Lab 4 : Resource Manager and SQL Quarantine**
+- **Lab 2 : Application Data Management and Administration**
+- **Lab 3 : Performance, Scalability and Elasticity**
+- **Lab 4 : Database Cloud Service Backup & Recovery**
+- **Lab 5 : Data Guard Physical Standby Database**
+- **Lab 6 : Database Service Patching**
+- **Lab 7 : Oracle Database Command Line Interface (DBCLI)**
+- **Lab 8 : Memoptimized Rowstore Fast Ingest**
+- **Lab 9 : Resource Manager and SQL Quarantine**
 
 ## Access the Labs
 
