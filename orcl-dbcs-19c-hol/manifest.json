@@ -1,0 +1,64 @@
+{
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Oracle Database Cloud Service Workshop",
+            "publisheddate": "08/01/2020",
+            "filename": "./introduction/introduction.md"
+        },
+        {
+            "title": "Lab 1: Oracle Cloud Infrastructure (OCI)",
+            "description": "Oracle Cloud Infrastructure (OCI)",
+            "publisheddate": "08/01/2020",
+            "filename": "./oci/oci.md"
+        },
+        {
+            "title": "Lab 2: Application Data Management and Administration",
+            "description": "Application Data Management and Administration",
+            "publisheddate": "08/01/2020",
+            "filename": "./prepare/prepare.md"
+        },
+        {
+            "title": "Lab 3: Performance, Scalability and Elasticity",
+            "description": "Performance, Scalability and Elasticity",
+            "publisheddate": "08/01/2020",
+            "filename": "./scaling-up/scaling-up.md"
+        },
+        {
+            "title": "Lab 4: Database Cloud Service Backup & Recovery",
+            "description": "Database Cloud Service Backup & Recovery",
+            "publisheddate": "08/01/2020",
+            "filename": "./bkup-recovery/bkup-recovery.md"
+        },
+        {
+            "title": "Lab 5: Data Guard Physical Standby Database",
+            "description": "Data Guard Physical Standby Database",
+            "publisheddate": "08/01/2020",
+            "filename": "./dataguard/dataguard.md"
+        },
+        {
+            "title": "Lab 6: Database Service Patching",
+            "description": "Database Service Patching",
+            "publisheddate": "08/01/2020",
+            "filename": "./patching/patching.md"
+        },
+        {
+            "title": "Lab 7: Oracle Database Command Line Interface (DBCLI)",
+            "description": "Oracle Database Command Line Interface (DBCLI)",
+            "publisheddate": "08/01/2020",
+            "filename": "./dbcli/dbcli.md"
+        },
+        {
+            "title": "Lab 8: Memoptimized Rowstore Fast Ingest",
+            "description": "Memoptimized Rowstore Fast Ingest",
+            "publisheddate": "08/01/2020",
+            "filename": "./memoptimize/memoptimize.md"
+        },
+        {
+            "title": "Lab 9: Resource Manager and SQL Quarantine",
+            "description": "Resource Manager and SQL Quarantine",
+            "publisheddate": "08/01/2020",
+            "filename": "./quarantine/quarantine.md"
+        }
+    ]
+}
