@@ -1,4 +1,4 @@
-# Database Service Patching
+# Database Cloud Service Patching
 
 ## Introduction
 
