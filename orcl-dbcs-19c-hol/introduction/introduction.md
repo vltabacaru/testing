@@ -94,8 +94,6 @@ Now you are ready to upload the public key to the Oracle Database Cloud Server w
 - **Lab 5 : Data Guard Physical Standby Database**
 - **Lab 6 : Database Cloud Service Patching**
 - **Lab 7 : Oracle Database Command Line Interface (DBCLI)**
-- **Lab 8 : Memoptimized Rowstore Fast Ingest**
-- **Lab 9 : Resource Manager and SQL Quarantine**
 
 ## Access the Labs
 

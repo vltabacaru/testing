@@ -1,4 +1,4 @@
-# Oracle Database Cloud Service Workshop
+# Oracle Database Cloud Features Workshop
 
 **Oracle Database Cloud Service** on virtual machines (VMs) offers on-demand, pay-as-you-go database services with dedicated hardware and local NVMe storage. Dedicated database instances with Oracle Database 11g, 12c, 18c, or 19c include a wide range of features, including the multitenant option for managing pluggable databases.
 
@@ -22,15 +22,11 @@ You can manage **Oracle Database Cloud Services** by using the Console, the API,
 Alternatively, you can follow the labs on this repo :
 
 - [Introduction](./introduction/content.md)
-- [Oracle Cloud Infrastructure (OCI)](./oci/oci.md)
-- [Application Data Management and Administration](./prepare/prepare.md)
-- [Performance, Scalability and Elasticity](./scaling-up/scaling-up.md)
-- [Database Cloud Service Backup & Recovery](./bkup-recovery/bkup-recovery.md)
-- [Data Guard Physical Standby Database](./dataguard/dataguard.md)
-- [Database Cloud Service Patching](./patching/patching.md)
-- [Oracle Database Command Line Interface (DBCLI)](./dbcli/dbcli.md)
 - [Memoptimized Rowstore Fast Ingest](./memoptimize/memoptimize.md)
 - [Resource Manager and SQL Quarantine](./quarantine/quarantine.md)
+- [Oracle 19c Automatic Indexing](./auto-index/auto-index.md)
+- [Managing Hybrid Partitioned Tables](./hybrid-partition/hybrid-partition.md)
+- [Oracle 20c Blockchain Tables Preview](./blockchain/blockchain.md)
 
 ## Oracle Cloud Account
 

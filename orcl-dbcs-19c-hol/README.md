@@ -29,8 +29,6 @@ Alternatively, you can follow the labs on this repo :
 - [Data Guard Physical Standby Database](./dataguard/dataguard.md)
 - [Database Cloud Service Patching](./patching/patching.md)
 - [Oracle Database Command Line Interface (DBCLI)](./dbcli/dbcli.md)
-- [Memoptimized Rowstore Fast Ingest](./memoptimize/memoptimize.md)
-- [Resource Manager and SQL Quarantine](./quarantine/quarantine.md)
 
 ## Oracle Cloud Account
 

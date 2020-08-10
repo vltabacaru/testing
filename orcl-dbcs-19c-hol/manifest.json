@@ -47,18 +47,6 @@
             "description": "Oracle Database Command Line Interface (DBCLI)",
             "publisheddate": "08/01/2020",
             "filename": "./dbcli/dbcli.md"
-        },
-        {
-            "title": "Lab 8: Memoptimized Rowstore Fast Ingest",
-            "description": "Memoptimized Rowstore Fast Ingest",
-            "publisheddate": "08/01/2020",
-            "filename": "./memoptimize/memoptimize.md"
-        },
-        {
-            "title": "Lab 9: Resource Manager and SQL Quarantine",
-            "description": "Resource Manager and SQL Quarantine",
-            "publisheddate": "08/01/2020",
-            "filename": "./quarantine/quarantine.md"
         }
     ]
 }

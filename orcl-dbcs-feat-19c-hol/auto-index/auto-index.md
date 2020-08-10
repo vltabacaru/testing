@@ -1,8 +1,20 @@
-# Oracle Cloud Infrastructure (OCI)
+# Oracle 19c Automatic Indexing
 
 ## Introduction
 
-Development .
+Creating indexes manually requires deep knowledge of the data model, application, and data distribution. Often DBAs make choices about which indexes to create, and then never revise their choices. As a result, opportunities for improvement are lost, and unnecessary indexes can become a performance liability.
+
+With automatic indexing the database monitors the application workload, creating and maintaining indexes automatically. The indexing feature is implemented as an automatic task that runs at a fixed interval. You can use the `DBMS_AUTO_INDEX` package to report on this automatic task and to set your preferences. 
+
+The automatic indexing feature automates the index management tasks in an Oracle database. Automatic indexing automatically creates, rebuilds, and drops indexes in a database based on the changes in application workload, thus improving database performance. The automatically managed indexes are known as **auto indexes**.
+
+Automatic indexing provides the following functionality:
+
+- Runs the automatic indexing process in the background periodically at a predefined time interval.
+- Analyzes application workload, and accordingly creates new indexes and drops the existing underperforming indexes to improve database performance.
+- Rebuilds the indexes that are marked unusable due to table partitioning maintenance operations, such as ALTER TABLE MOVE.
+- Provides PL/SQL APIs for configuring automatic indexing in a database and generating reports related to automatic indexing operations.
+
 
 ## Step 1: Genera
 

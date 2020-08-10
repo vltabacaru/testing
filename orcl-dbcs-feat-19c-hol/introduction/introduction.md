@@ -1,8 +1,8 @@
-# Oracle Database Cloud Service Workshop
+# Oracle Database Cloud Features Workshop
 
 ## Workshop Overview
 
-This Getting Started guide will get you ready for the Oracle Database Cloud Service labs.  You will be required to download several software tools to access the Oracle Database Cloud Service.  This workshop and the labs that follow support either Windows clients or Linux clients.
+This Getting Started guide will help you understand some of the most popular features of the Oracle Database Cloud Service.  You will be required to download several software tools to access the Oracle Database Cloud Service.  This workshop and the labs that follow support either Windows clients or Linux clients.
 
 ## Workshop Requirements
 
@@ -87,15 +87,11 @@ Now you are ready to upload the public key to the Oracle Database Cloud Server w
 
 ## Agenda
 
-- **Lab 1 : Oracle Cloud Infrastructure (OCI)**
-- **Lab 2 : Application Data Management and Administration**
-- **Lab 3 : Performance, Scalability and Elasticity**
-- **Lab 4 : Database Cloud Service Backup & Recovery**
-- **Lab 5 : Data Guard Physical Standby Database**
-- **Lab 6 : Database Cloud Service Patching**
-- **Lab 7 : Oracle Database Command Line Interface (DBCLI)**
-- **Lab 8 : Memoptimized Rowstore Fast Ingest**
-- **Lab 9 : Resource Manager and SQL Quarantine**
+- **Lab 1 : Memoptimized Rowstore Fast Ingest**
+- **Lab 2 : Resource Manager and SQL Quarantine**
+- **Lab 3 : Oracle 19c Automatic Indexing**
+- **Lab 4 : Managing Hybrid Partitioned Tables**
+- **Lab 5 : Oracle 20c Blockchain Tables Preview**
 
 ## Access the Labs
 

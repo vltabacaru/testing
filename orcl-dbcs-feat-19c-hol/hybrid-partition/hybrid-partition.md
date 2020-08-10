@@ -1,8 +1,18 @@
-# Oracle Cloud Infrastructure (OCI)
+# Managing Hybrid Partitioned Tables
 
 ## Introduction
 
-Development .
+You can use the `EXTERNAL PARTITION ATTRIBUTES` clause of the `CREATE TABLE` statement to determine hybrid partitioning for a table. The partitions of the table can be external and or internal.
+
+A hybrid partitioned table enables partitions to reside both in database data files (internal partitions) and in external files and sources (external partitions). You can create and query a hybrid partitioned table to utilize the benefits of partitioning with classic partitioned tables, such as pruning, on data that is contained in both internal and external partitions.
+
+The `EXTERNAL PARTITION ATTRIBUTES` clause of the `CREATE TABLE` statement is defined at the table level for specifying table level external parameters in the hybrid partitioned table, such as:
+
+- The access driver type, such as `ORACLE_LOADER`, `ORACLE_DATAPUMP`, `ORACLE_HDFS`, `ORACLE_HIVE`
+- The default directory for all external partitions files
+- The access parameters
+
+The `EXTERNAL` clause of the `PARTITION` clause defines the partition as an external partition. When there is no `EXTERNAL` clause, the partition is an internal partition. You can specify for each external partition different attributes than the default attributes defined at the table level, such the directory. 
 
 ## Step 1: Genera
 
