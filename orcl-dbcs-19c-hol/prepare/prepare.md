@@ -318,7 +318,7 @@ sqlplus sys/DBlearnPTS#20_@<DB Node Private IP Address>:1521/pdb012.<Host Domain
 Run the SH schema installation script. Make sure to replace **DB Node Private IP Address** and **Host Domain Name** with the actual values.
 
 ````
-@db-sample-schemas-19c/sales_history/sh_main.sql DBlearnPTS#20_ USERS TEMP DBlearnPTS#20_ ~/db-sample-schemas-19c/sales_history/ /home/opc/logs/ v3 <DB Node Private IP Address>:1521/pdb012.<Host Domain Name>
+@db-sample-schemas-19c/sales_history/sh_main.sql DBlearnPTS#20_ USERS TEMP DBlearnPTS#20_ /home/opc/db-sample-schemas-19c/sales_history/ /home/opc/logs/ v3 <DB Node Private IP Address>:1521/pdb012.<Host Domain Name>
 ````
 
 Display current user. If all steps were followed, the current user should be **SH**.

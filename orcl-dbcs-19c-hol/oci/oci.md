@@ -80,10 +80,10 @@ Click on hamburger menu ≡, then Compute > **Instances**. Click **[Your Initial
 
 Click on hamburger menu ≡, then **Bare Metal, VM, and Exadata**. Click **[Your Initials]-DB** DB System. On the DB System Details page, copy Host Domain Name in your notes. In the table below, copy Database Unique Name in your notes. Click **Nodes** on the left menu, and copy Private IP Address in your notes.
 
-Connect to the Compute node using SSH.
+Connect to the Compute node using SSH. In OpenSSH, local port forwarding is configured using the -L option. Use this option to forward any connection to port 3389 on the local machine to port 3389 on your Compute node.
 
 ````
-ssh -C -i id_rsa opc@<Compute Public IP Address>
+ssh -C -i id_rsa -L 3389:localhost:3389 opc@<Compute Public IP Address>
 ````
 
 Try to connect to your DB System database using SQL*Plus.
@@ -113,7 +113,7 @@ Click **Public Subnet-[Your Initials]-VCN**. Click **Default Security List for [
 
 **Save Changes**.
 
-## Step 7: Verify Connectivity
+## Step 7: Verify Database Connectivity
 
 Use the same Compute node SSH connection. Try to connect to your DB System database using SQL*Plus.
 
@@ -156,6 +156,81 @@ This pluggable database doesn't have Oracle Sample Schemas. Exit SQL*Plus.
 ````
 exit
 ````
+
+## Step 8: Remote Desktop Connection
+
+For some of the labs we need graphical user interface, and this can be achieved using a Remote Desktop connection.
+
+Use the substitute user command to start a session as **root** user.
+
+````
+sudo su -
+````
+
+Create a new script that will install and configure all the components required for the Remote Desktop connection.
+
+````
+vi xRDP_config.sh
+````
+
+Press **i** to insert text, and paste the following lines:
+
+````
+#!/bin/bash
+
+yum -y groupinstall "Server with GUI"
+
+yum -y install xrdp tigervnc-server terminus-fonts terminus-fonts-console cabextract
+
+yum -y localinstall https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+sed -i 's/max_bpp=24/max_bpp=128\nuse_compression=yes/g' /etc/xrdp/xrdp.ini
+
+systemctl enable xrdp
+
+firewall-cmd --permanent --add-port=3389/tcp
+
+firewall-cmd --reload
+
+chcon --type=bin_t /usr/sbin/xrdp
+chcon --type=bin_t /usr/sbin/xrdp-sesman
+
+systemctl start xrdp
+
+echo -e "DBlearnPTS#20_\nDBlearnPTS#20_" | passwd oracle
+````
+
+Press **Esc**, type **:wq** and hit **Enter** to save the file and close. Make this script executable.
+
+````
+chmod u+x xRDP_config.sh 
+````
+
+Run the script and check that all goes well.
+
+````
+./xRDP_config.sh
+````
+
+Use Microsoft Remote Desktop to open a connection to **localhost**. When asked about username and password, use **oracle** and **DBlearnPTS#20_**.
+
+After setting your language and keyboard layout, open a Terminal window using **Right-Click** and **Open Terminal**. Check if your keyboard works. If you need to select another keyboard layout, click the **On-Off** button in the upper right corner, and **Settings** button. You will find the options under Region & Language.
+
+From the Terminal window, launch SQL Developer.
+
+````
+sqldeveloper 
+````
+
+It will ask for the full pathname of a JDK installation. This should be available in folder **/usr/java**.
+
+````
+Default JDK not found
+Type the full pathname of a JDK installation (or Ctrl-C to quit), the path will be stored in /home/oracle/.sqldeveloper/19.4.0/product.conf
+/usr/java/jdk-12.0.2
+````
+
+Once JDK installation full pathname is set, SQL Developer can be started from **Applications** main menu, and **Programming**.
 
 ## Acknowledgements
 

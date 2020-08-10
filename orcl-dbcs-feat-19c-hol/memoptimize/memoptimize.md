@@ -6,7 +6,7 @@ The fast ingest functionality of Memoptimized Rowstore enables fast data inserts
 
 Using the rich analytical features of Oracle Database, you can now perform data analysis more effectively by easily integrating data from high-frequency data streaming applications with your existing application data.
 
-Fast ingest uses MEMOPTIMIZE_WRITE to insert data into tables specified as MEMOPTIMIZE FOR WRITE hint. The database temporarily buffers these inserts in the large pool and automatically commits the changes at the time of writing these buffered inserts to disk. The changes cannot be rolled back.
+Fast ingest uses `MEMOPTIMIZE_WRITE` to insert data into tables specified as `MEMOPTIMIZE FOR WRITE` hint. The database temporarily buffers these inserts in the large pool and automatically commits the changes at the time of writing these buffered inserts to disk. The changes cannot be rolled back.
 
 The inserts using fast ingest are also known as deferred inserts, because they are initially buffered in the large pool and later written to disk asynchronously by background processes.
 

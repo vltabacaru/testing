@@ -16,16 +16,16 @@ This Getting Started guide will get you ready for the Oracle Database Cloud Serv
 ## SSH Keys
 
 Keys are part of the key pairs used to securely connect to the Oracle Database Cloud.  By default Oracle Cloud uses the secure key infrastructure for connectivity from a client.
-- labkey – private key on Linux client
-- labkey.ppk – private key for Putty client
-- labkey.pub – public key installed on the Oracle Cloud server
+- id_rsa – private key on Linux client
+- id_rsa.ppk – private key for Putty client
+- id_rsa.pub – public key installed on the Oracle Cloud server
 
-If you are using a Linux client, immediately change the file permissions on labkey using the change mode command.
+If you are using a Linux client, immediately change the file permissions on **id_rsa** using the change mode command.
 
 ````
-$ chmod 600 labkey
-$ ls –al labkey
--rw-------  1 oracle oracle     1671 Jan 20 20:40 labkey
+$ chmod 600 id_rsa
+$ ls –al id_rsa
+-rw-------  1 oracle oracle     1671 Jan 20 20:40 id_rsa
 ````
 
 >**Note** : The instructor may provide you a pre-created set of keys.
@@ -112,3 +112,4 @@ Now you are ready to upload the public key to the Oracle Database Cloud Server w
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
 
 
+id_rsa
