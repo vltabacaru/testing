@@ -91,7 +91,7 @@ Now you are ready to upload the public key to the Oracle Database Cloud Server w
 - **Lab 2 : Resource Manager and SQL Quarantine**
 - **Lab 3 : Oracle 19c Automatic Indexing**
 - **Lab 4 : Managing Hybrid Partitioned Tables**
-- **Lab 5 : Oracle 20c Blockchain Tables Preview**
+- **Lab 5 : Oracle 20c Preview Blockchain Tables**
 
 ## Access the Labs
 

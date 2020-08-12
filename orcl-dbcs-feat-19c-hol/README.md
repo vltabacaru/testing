@@ -26,7 +26,7 @@ Alternatively, you can follow the labs on this repo :
 - [Resource Manager and SQL Quarantine](./quarantine/quarantine.md)
 - [Oracle 19c Automatic Indexing](./auto-index/auto-index.md)
 - [Managing Hybrid Partitioned Tables](./hybrid-partition/hybrid-partition.md)
-- [Oracle 20c Blockchain Tables Preview](./blockchain/blockchain.md)
+- [Oracle 20c Preview Blockchain Tables](./blockchain/blockchain.md)
 
 ## Oracle Cloud Account
 
