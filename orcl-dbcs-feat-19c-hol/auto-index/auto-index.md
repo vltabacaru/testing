@@ -15,7 +15,7 @@ Automatic indexing provides the following functionality:
 - Rebuilds the indexes that are marked unusable due to table partitioning maintenance operations, such as ALTER TABLE MOVE.
 - Provides PL/SQL APIs for configuring automatic indexing in a database and generating reports related to automatic indexing operations.
 
->**Note** : Some features in this lab are restricted to Database Cloud Service Enterprise Edition - Extreme Performance and Engineered Systems platforms only, Exadata and Exadata Cloud Service.
+>**Note** : Some features in this lab are restricted to Engineered Systems platforms only, Exadata and Exadata Cloud Service.
 
 ## Step 1: Check Existing Indexes
 
