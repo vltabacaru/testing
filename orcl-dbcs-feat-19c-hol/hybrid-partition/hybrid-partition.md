@@ -524,7 +524,7 @@ select count(*) from HYBRID_SALES partition (SALES_Q3_2002);
 0
 ````
 
-We can insert rows into internal partitions from the original `SALES` table. Using the partition extension clause `PARTITION` (partition_name), we can specify the name of the partition within `SALES` table from which we want to retrieve data, in order to populate one internal partition in particular.
+We can insert rows into internal partitions from the original `SALES` table. Using the partition extension clause `PARTITION (PARTITION_NAME)`, we can specify the name of the partition within `SALES` table from which we want to retrieve data, in order to populate one internal partition in particular.
 
 ````
 insert into HYBRID_SALES (PROD_ID, CUST_ID, TIME_ID, CHANNEL_ID, PROMO_ID, QUANTITY_SOLD, AMOUNT_SOLD)
