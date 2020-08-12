@@ -229,13 +229,13 @@ Check directory objects that will be used as destination to export `SALES` table
 select DIRECTORY_NAME, DIRECTORY_PATH from ALL_DIRECTORIES where DIRECTORY_NAME like 'SALES%';
 ````
 
-If all directories are prepared, we can export partition `SALES_Q1_1998` from table `SALES`, as external file **SALES_Q1_1998.csv** located in directory SALES_98.
+If all directories are prepared, we can export partition `SALES_Q1_1998` from table `SALES`, as external file `SALES_Q1_1998.csv` located in directory SALES_98.
 
 ````
 exec table_part_to_csv('SALES','SALES_Q1_1998','SALES_98','SALES_Q1_1998.csv');
 ````
 
-Using your favorite text editor, check the contents of **SALES_Q1_1998.csv** file. Run this command in a new tab of the Terminal window on the remote desktop connection. You can also use vim editor in the command line, or `cat` (list entire file) or `head -50` (list first 50 rows) commands from SQL*Plus session. 
+Using your favorite text editor, check the contents of `SALES_Q1_1998.csv` file. Run this command in a new tab of the Terminal window on the remote desktop connection. You can also use vim editor in the command line, or `cat` (list entire file) or `head -50` (list first 50 rows) commands from SQL*Plus session. 
 
 The last option is the easiest. First line contains the names of the columns, and all data fields are separated by double quotes. This format can be customized. 
 
