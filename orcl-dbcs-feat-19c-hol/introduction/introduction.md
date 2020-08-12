@@ -10,9 +10,9 @@ This Getting Started guide will help you understand some of the most popular fea
     * Provided by the instructor for instructor-led workshops
 * Access to a laptop or a desktop
     * Requires Microsoft Remote Desktop software
-* Complete [Oracle Database Cloud Service Workshop](../../orcl-dbcs-19c-hol/)
-* Provision OCI resources explained in [Oracle Cloud Infrastructure (OCI)](../../orcl-dbcs-19c-hol/oci/oci.md) lab
-* Install HR and SH sample schemas explained in [Application Data Management and Administration](../../orcl-dbcs-19c-hol/prepare/prepare.md)
+* Complete Lab 1 & Lab 2 of [Oracle Database Cloud Service Workshop](../../orcl-dbcs-19c-hol/)
+    * Provision OCI resources explained in Lab 1: Oracle Cloud Infrastructure (OCI)
+    * Install HR and SH sample schemas explained in Lab 2: Application Data Management and Administration
 * Putty or OpenSSH and web browser
 * SSH Keys
 

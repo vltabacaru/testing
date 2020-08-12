@@ -10,9 +10,9 @@ You can manage **Oracle Database Cloud Services** by using the Console, the API,
     * Provided by the instructor for instructor-led workshops
 * Access to a laptop or a desktop
     * Requires Putty or OpenSSH
-* Complete [Oracle Database Cloud Service Workshop](../orcl-dbcs-19c-hol/)
-* Provision OCI resources explained in [Oracle Cloud Infrastructure (OCI)](../orcl-dbcs-19c-hol/oci/oci.md) lab
-* Install HR and SH sample schemas explained in [Application Data Management and Administration](../orcl-dbcs-19c-hol/prepare/prepare.md)
+* Complete [Oracle Database Cloud Service Workshop](../orcl-dbcs-19c-hol/README.md)
+    * Provision OCI resources explained in [Lab 1: Oracle Cloud Infrastructure (OCI)](../orcl-dbcs-19c-hol/oci/oci.md) lab
+    * Install HR and SH sample schemas explained in [Lab 2: Application Data Management and Administration](../orcl-dbcs-19c-hol/prepare/prepare.md)
 * Knowledge of Oracle Database is a plus but not required
 * No previous knowledge of Oracle Database Cloud Service required
 
