@@ -182,7 +182,11 @@ AUTO_INDEX_SCHEMA                schema IN (OE, SH)  19-JUN-19  08.49.21.000000 
 AUTO_INDEX_SPACE_BUDGET          50
 ````
 
-Among other settings we can configure, we have `AUTO_INDEX_RETENTION_FOR_AUTO` that sets the retention period for unused auto indexes, default is 373 days (one year plus one week). This means the unused auto indexes are deleted after 373 days. You can use the `AUTO_INDEX_RETENTION_FOR_MANUAL` configuration setting to specify a period for retaining unused non-auto indexes (manually created indexes) in a database. `AUTO_INDEX_SPACE_BUDGET` configuration setting can be used to specify percentage of tablespace to allocate for auto indexes. In our case, 50% of tablespace `TBS_AUTO_IDX` is allocated for this purpose.
+Among other settings we can configure, we have:
+
+- `AUTO_INDEX_RETENTION_FOR_AUTO` that sets the retention period for unused auto indexes, default is 373 days (one year plus one week). This means the unused auto indexes are deleted after 373 days;
+- `AUTO_INDEX_RETENTION_FOR_MANUAL` configuration setting specifies a period for retaining unused non-auto indexes (manually created indexes) in a database;
+- `AUTO_INDEX_SPACE_BUDGET` configuration setting can be used to specify percentage of tablespace to allocate for auto indexes. In our case, 50% of tablespace `TBS_AUTO_IDX` is allocated for this purpose.
 
 ## Step 7: Generate Auto Indexing Report
 
@@ -284,7 +288,7 @@ Run the following query:
 select TASK_NAME,DESCRIPTION, ADVISOR_NAME, EXECUTION_START, STATUS from DBA_ADVISOR_TASKS;
 ````
 
-DBA_ADVISOR_EXECUTIONS displays metadata information for task executions.
+`DBA_ADVISOR_EXECUTIONS` displays metadata information for task executions.
 
 ````
 select to_char(execution_start, 'DD-MM-YY HH24:MI:SS') execution_start,
@@ -418,7 +422,7 @@ Please make sure these queries execute successfully on the SH schema, and no err
 
 ## Step 12: Run Analytics Queries
 
-In addition to the OLTP synthetic workload, we can generate also some advanced analytical SQL workload. In this section we want to verify that automatic indexing is also capable of handling advanced business intelligence queries. For these queries, use SQL Developer, available on the remot desktop connection. Create and save a new database connection as user SH. 
+In addition to the OLTP synthetic workload, we can generate also some advanced analytical SQL workload. In this section we want to verify that automatic indexing is also capable of handling advanced business intelligence queries. For these queries, use SQL Developer, available on the remote desktop connection. Create and save a new database connection as user SH. 
 
 Here is an example of advanced analytical SQL statement. This query returns the percent change in market share for a grouping of SH top 20% of products for the current three-month period versus same period one year ago for accounts that grew by more than 20 percent in revenue.
 
@@ -593,7 +597,7 @@ EXECUTION_START    EXECUTION_END      STATUS
 
 Automatic indexing process runs in the background periodically at a predefined time interval, default is 15 minutes. It analyzes application workload, and accordingly creates new indexes and drops the existing underperforming indexes to improve database performance. It also rebuilds the indexes that are marked unusable due to table partitioning maintenance operations, such as `ALTER TABLE MOVE`.
 
-Count all `VALID` and `VISIBLE` indexes in the SH schema, that are auto indexes (`AUTO = ‘YES’`). AUTO column is available starting with Oracle Database release 19c, version 19.1.
+Count all `VALID` and `VISIBLE` indexes in the SH schema, that are auto indexes (`AUTO = ‘YES’`). `AUTO` column is available starting with Oracle Database release 19c, version 19.1.
 
 ````
 select index_name, index_type, status, visibility
@@ -626,7 +630,7 @@ All indexes, including the new auto indexes, are listed using the following quer
 select TABLE_NAME, INDEX_NAME, INDEX_TYPE, LAST_ANALYZED from DBA_INDEXES where TABLE_OWNER = 'SH';
 ````
 
-Can you identify the auto indexes for the list? Please observe the tables on which these indexes have been created, and their types.
+Can you identify the auto indexes for the list? Please observe the tables on which these indexes have been created, and what types.
 
 As we have noticed already, automatic indexing provides PL/SQL APIs for configuring automatic indexing in a database and generating reports related to automatic indexing operations.
 
