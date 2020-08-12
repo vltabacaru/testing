@@ -90,7 +90,7 @@ Now you are ready to upload the public key to the Oracle Database Cloud Server w
 - **Lab 1 : Oracle Cloud Infrastructure (OCI)**
 - **Lab 2 : Application Data Management and Administration**
 - **Lab 3 : Performance, Scalability and Elasticity**
-- **Lab 4 : Database Cloud Service Backup & Recovery**
+- **Lab 4 : Database Cloud Service Backup and Recovery**
 - **Lab 5 : Data Guard Physical Standby Database**
 - **Lab 6 : Database Cloud Service Patching**
 - **Lab 7 : Oracle Database Command Line Interface (DBCLI)**

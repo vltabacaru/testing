@@ -25,7 +25,7 @@ Alternatively, you can follow the labs on this repo :
 - [Oracle Cloud Infrastructure (OCI)](./oci/oci.md)
 - [Application Data Management and Administration](./prepare/prepare.md)
 - [Performance, Scalability and Elasticity](./scaling-up/scaling-up.md)
-- [Database Cloud Service Backup & Recovery](./bkup-recovery/bkup-recovery.md)
+- [Database Cloud Service Backup and Recovery](./bkup-recovery/bkup-recovery.md)
 - [Data Guard Physical Standby Database](./dataguard/dataguard.md)
 - [Database Cloud Service Patching](./patching/patching.md)
 - [Oracle Database Command Line Interface (DBCLI)](./dbcli/dbcli.md)
