@@ -119,7 +119,7 @@ ORDERS                      31 YES                         60 SHA2_512
 JSON native data type automatically validates the format, and does not require a IS JSON check constraint like in previous Oracle versions.
 
 ````
-SQL> INSERT INTO orders (order_doc) VALUES ('{{ "This is not a valid", "JSON" ::; "document"');
+SQL> INSERT INTO orders (order_doc) VALUES ('++{} "This is not a valid", "JSON" ::; "document !"');
 
 ORA-40441: JSON syntax error
 ````
