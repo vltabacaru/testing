@@ -26,7 +26,7 @@ Connect to your pluggable database as HR user using SQL*Plus.
 sqlplus hr/DBlearnPTS#20_@<DB Node Private IP Address>:1521/pdb012.<Host Domain Name>
 ````
 
-Create a new table enabled for fast ingest by specifying the MEMOPTIMIZE FOR WRITE hint in the CREATE TABLE or ALTER TABLE statement. However, MEMOPTIMIZE FOR WRITE feature cannot be enabled on a table in encrypted tablespace.
+Create a new table enabled for fast ingest by specifying the `MEMOPTIMIZE FOR WRITE` hint in the `CREATE TABLE` or `ALTER TABLE` statement. However, `MEMOPTIMIZE FOR WRITE` feature cannot be enabled on a table in encrypted tablespace.
 
 ````
 create table MEMOPTWRITES
@@ -50,7 +50,7 @@ col TABLESPACE_NAME format a20
 select TABLESPACE_NAME, STATUS, ENCRYPTED, CONTENTS from DBA_TABLESPACES;
 ````
 
-Create again a new table enabled for fast ingest, this time in SYSAUX tablespace.
+Create again a new table enabled for fast ingest, this time in `SYSAUX` tablespace.
 
 ````
 create table HR.MEMOPTWRITES
@@ -59,7 +59,7 @@ tablespace SYSAUX
 memoptimize for write;
 ````
 
-It will not work because, by default, a table does not have a segment created until a first row is inserted. MEMOPTIMIZE FOR WRITE tables require a segment created before the first row is inserted. We need to modify a parameter called **deferred_segment_creation**.
+It will not work because, by default, a table does not have a segment created until a first row is inserted. `MEMOPTIMIZE FOR WRITE` tables require a segment created before the first row is inserted. We need to modify a parameter called `deferred_segment_creation`.
 
 ````
 show parameter deferred_segment_creation
@@ -69,7 +69,7 @@ NAME                            TYPE        VALUE
 deferred_segment_creation       Boolean     TRUE
 ````
 
-Set **deferred_segment_creation** parameter to **FALSE**.
+Set `deferred_segment_creation` parameter to **FALSE**.
 
 ````
 alter system set deferred_segment_creation=FALSE scope=BOTH;
@@ -99,7 +99,7 @@ col TABLESPACE_NAME format a20
 select TABLE_NAME, TABLESPACE_NAME from USER_TABLES;
 ````
 
-Enable fast ingest for inserts by specifying the MEMOPTIMIZE_WRITE hint in the INSERT statement.
+Enable fast ingest for inserts by specifying the `MEMOPTIMIZE_WRITE` hint in the `INSERT` statement.
 
 >**Note** : The following inserts is not how fast ingest is meant to be used in the real world, but demonstrates the mechanism. In the real world, the data inserted using fast ingest comes from IoT devices like sensors, smart meters, or traffic cameras.
 
@@ -113,11 +113,11 @@ Check if data has been written in your table.
 select * from MEMOPTWRITES;
 ````
 
-The result of the insert above is to write data to the ingest buffer in the large pool of the SGA. At some point, that data is flushed to the MEMOPTWRITES table. Until that happens, the data is not durable.
+The result of the insert above is to write data to the ingest buffer in the large pool of the SGA. At some point, that data is flushed to the `MEMOPTWRITES` table. Until that happens, the data is not durable.
 
 The first time an insert is run, the fast ingest area is allocated from the large pool. The amount of memory allocated is written to the alert.log. 
 
-You can manually flush all the fast ingest data from the large pool to disk for the current session using DBMS_MEMOPTIMIZE.WRITE_END procedure.
+You can manually flush all the fast ingest data from the large pool to disk for the current session using `DBMS_MEMOPTIMIZE.WRITE_END` procedure.
 
 ````
 exec DBMS_MEMOPTIMIZE.WRITE_END
@@ -145,13 +145,13 @@ Connect to your pluggable database as SYS user using SQL*Plus. Let's call this *
 sqlplus sys/DBlearnPTS#20_@<DB Node Private IP Address>:1521/pdb012.<Host Domain Name> as sysdba
 ````
 
-As SYSDBA, you can see some administrative information about the fast ingest buffers by querying the view **V$MEMOPTIMIZE_WRITE_AREA**.
+As SYSDBA, you can see some administrative information about the fast ingest buffers by querying the view `V$MEMOPTIMIZE_WRITE_AREA`.
 
 ````
 select * from V$MEMOPTIMIZE_WRITE_AREA;
 ````
 
-There are two new columns in DBA_TABLES view: MEMOPTIMIZE_READ - indicates whether the table is enabled for Fast Key Based Access, and MEMOPTIMIZE_WRITE - indicates whether the fast ingest **MEMOPTIMIZE FOR WRITE** attribute is set.
+There are two new columns in `DBA_TABLES` view: `MEMOPTIMIZE_READ` - indicates whether the table is enabled for Fast Key Based Access, and `MEMOPTIMIZE_WRITE` - indicates whether the fast ingest `MEMOPTIMIZE FOR WRITE` attribute is set.
 
 ````
 select MEMOPTIMIZE_READ Mem_read,
@@ -170,19 +170,19 @@ insert /*+ MEMOPTIMIZE_WRITE */ into MEMOPTWRITES values (2, 'Memoptwrites');
 
 ### Connection 2: SYS
 
-Use the second connection to your pluggable database as SYS user. Verify the data in **HR.MEMOPTWRITES** table.
+Use the second connection to your pluggable database as SYS user. Verify the data in `HR.MEMOPTWRITES` table.
 
 ````
 select * from HR.MEMOPTWRITES;
 ````
 
-If the deferred, asynchronous process has not written to disk the content of the buffer, which occurs periodically, then you may not see the last row inserted. As SYS user, you can use DBMS_MEMOPTIMIZE_ADMIN package to control the fast ingest data in the large pool, with WRITES_FLUSH procedure that flushes all the fast ingest data from the large pool to disk for all the sessions.
+If the deferred, asynchronous process has not written to disk the content of the buffer, which occurs periodically, then you may not see the last row inserted. As SYS user, you can use `DBMS_MEMOPTIMIZE_ADMIN` package to control the fast ingest data in the large pool, with `WRITES_FLUSH` procedure that flushes all the fast ingest data from the large pool to disk for all the sessions.
 
 ````
 exec DBMS_MEMOPTIMIZE_ADMIN.WRITES_FLUSH
 ````
 
-Verify again the data in **HR.MEMOPTWRITES** table.
+Verify again the data in `HR.MEMOPTWRITES` table.
 
 ````
 select * from HR.MEMOPTWRITES;
@@ -199,13 +199,13 @@ select DISPLAY_NAME, VALUE from V$MYSTAT m, V$STATNAME n
 
 ### Connection 1: HR 
 
-Use the first connection to your pluggable database as HR user. Verify the data in **MEMOPTWRITES** table.
+Use the first connection to your pluggable database as HR user. Verify the data in `MEMOPTWRITES` table.
 
 ````
 select * from MEMOPTWRITES;
 ````
 
-Delete all rows in **MEMOPTWRITES** table.
+Delete all rows in `MEMOPTWRITES` table.
 
 ````
 delete from MEMOPTWRITES;
@@ -296,13 +296,13 @@ end;
 
 ### Connection 2: SYS
 
-Use the second connection to your pluggable database as SYS user. Verify the data in **HR.MEMOPTWRITES** table.
+Use the second connection to your pluggable database as SYS user. Verify the data in `HR.MEMOPTWRITES` table.
 
 ````
 select count(*) from HR.MEMOPTWRITES;
 ````
 
-Run WRITES_FLUSH procedure that flushes all the fast ingest data from the large pool to disk for all sessions.
+Run `WRITES_FLUSH` procedure that flushes all the fast ingest data from the large pool to disk for all sessions.
 
 ````
 exec DBMS_MEMOPTIMIZE_ADMIN.WRITES_FLUSH
@@ -327,23 +327,24 @@ truncate table HR.MEMOPTWRITES;
 
 ## Step 4: Some Fast Ingest Particularities
 
-As SYS user (or HR user) try to run a multi-row insert using fast ingest for inserts by specifying the MEMOPTIMIZE_WRITE hint in the INSERT statement. It doesn't work, as this is one of the limitations of fast ingest feature.
+As SYS user (or HR user) try to run a multi-row insert using fast ingest for inserts by specifying the `MEMOPTIMIZE_WRITE` hint in the `INSERT` statement. It doesn't work, as this is one of the limitations of fast ingest feature.
 
 ````
 insert /*+ MEMOPTIMIZE_WRITE */ all 
   into HR.MEMOPTWRITES values (1, 'Memoptwrites')
   into HR.MEMOPTWRITES values (2, 'Memoptwrites')
  select 1 from DUAL;
+
 ORA-62139: MEMOPTIMIZE_WRITE hint disallowed for this operation
 ````
 
-Drop HR.MEMOPTWRITES table.
+Drop `HR.MEMOPTWRITES` table.
 
 ````
 drop table HR.MEMOPTWRITES;
 ````
 
-Create a new HR.MEMOPTWRITES table, this time with a PRIMARY KEY constraint.
+Create a new `HR.MEMOPTWRITES` table, this time with a `PRIMARY KEY` constraint.
 
 ````
 create table HR.MEMOPTWRITES
@@ -354,7 +355,7 @@ memoptimize for write;
 
 ### Connection 1: HR
 
-Use the first connection to your pluggable database as HR user. Insert 10 rows in the new **MEMOPTWRITES** table using fast ingest, having the same value for the PRIMARY KEY column.
+Use the first connection to your pluggable database as HR user. Insert 10 rows in the new `MEMOPTWRITES` table using fast ingest, having the same value for the `PRIMARY KEY` column.
 
 ````
 begin

@@ -183,7 +183,7 @@ Now we will set some limits for the queries that user UNAUTH is allowed to execu
 
 ### Connection 1: SYS
 
-Use the first connection to the pluggable database as SYS user. V$SESSION view displays session information for each current session. Observe the value of the `RESOURCE_CONSUMER_GROUP` column.
+Use the first connection to the pluggable database as SYS user. `V$SESSION` view displays session information for each current session. Observe the value of the `RESOURCE_CONSUMER_GROUP` column.
 
 ````
 set linesize 130
@@ -239,7 +239,7 @@ Elapsed: 00:00:31.96
 
 ### Connection 1: SYS
 
-Use the first connection to the pluggable database as SYS user. Observe again the `RESOURCE_CONSUMER_GROUP` column in V$SESSION view.
+Use the first connection to the pluggable database as SYS user. Observe again the `RESOURCE_CONSUMER_GROUP` column in `V$SESSION` view.
 
 ````
 select SID, SERIAL#, USERNAME, RESOURCE_CONSUMER_GROUP from V$SESSION where USERNAME='UNAUTH';
@@ -253,7 +253,7 @@ It confirms user UNAUTH was mapped correctly with the corresponding consumer gro
 
 ## Step 6: SQL Quarantine Setup 
 
-V$SQL view lists statistics on shared SQL areas. `SQL_ID` is the SQL identifier of the parent cursor in the library cache. `PLAN_HASH_VALUE` is the numeric representation of the current SQL plan for this cursor. We need these two values to configure SQL Quarantine.
+`V$SQL` view lists statistics on shared SQL areas. `SQL_ID` is the SQL identifier of the parent cursor in the library cache. `PLAN_HASH_VALUE` is the numeric representation of the current SQL plan for this cursor. We need these two values to configure SQL Quarantine.
 
 ````
 select SQL_ID, PLAN_HASH_VALUE from V$SQL where SQL_TEXT = 'SELECT count(*) FROM my_report r1, my_report r2 WHERE r1.c=r2.c AND r1.c=1';
@@ -316,7 +316,7 @@ It is terminated in .01 seconds.
 
 Use the first connection to the pluggable database as SYS user.
 
-You can query the V$SQL and GV$SQL views to get details about the quarantined execution plans of SQL statements. `SQL_QUARANTINE` column contains the name of the SQL quarantine configuration, and `AVOIDED_EXECUTIONS` the number of times this cursor was prevented from being used due to the plan being quarantined.
+You can query the `V$SQL` and `GV$SQL` views to get details about the quarantined execution plans of SQL statements. `SQL_QUARANTINE` column contains the name of the SQL quarantine configuration, and `AVOIDED_EXECUTIONS` the number of times this cursor was prevented from being used due to the plan being quarantined.
 
 ````
 col SQL_QUARANTINE format a40
@@ -328,7 +328,7 @@ SQL_QUARANTINE				 AVOIDED_EXECUTIONS
 SQL_QUARANTINE_7quzzzhxrb2hg				  1
 ````
 
-You can query a quarantine threshold for a quarantine configuration using the `DBMS_SQLQ.GET_PARAM_VALUE_QUARANTINE` function. The following example returns the quarantine threshold for elapsed time for the quarantine configuration. When a specific value is not specified, quarantines have thresholds set to ALWAYS.
+You can query a quarantine threshold for a quarantine configuration using the `DBMS_SQLQ.GET_PARAM_VALUE_QUARANTINE` function. The following example returns the quarantine threshold for elapsed time for the quarantine configuration. When a specific value is not specified, quarantines have thresholds set to `ALWAYS`.
 
 ````
 declare
