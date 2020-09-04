@@ -1,0 +1,46 @@
+{
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "Oracle Autonomous JSON Database (AJD) Workshop",
+            "publisheddate": "09/01/2020",
+            "filename": "./introduction/introduction.md"
+        },
+        {
+            "title": "Lab 1: Development Project Resources",
+            "description": "Development Project Resources",
+            "publisheddate": "09/01/2020",
+            "filename": "./resources/resources.md"
+        },
+        {
+            "title": "Lab 2: Retrieve Data from Web Service",
+            "description": "Retrieve Data from Web Service",
+            "publisheddate": "09/01/2020",
+            "filename": "./http-request/http-request.md"
+        },
+        {
+            "title": "Lab 3: Process JSON Documents",
+            "description": "Process JSON Documents",
+            "publisheddate": "09/01/2020",
+            "filename": "./json-data/json-data.md"
+        },
+        {
+            "title": "Lab 4: Oracle REST Data Services",
+            "description": "Oracle REST Data Services",
+            "publisheddate": "09/01/2020",
+            "filename": "./ords/ords.md"
+        },
+        {
+            "title": "Lab 5: User Authentication for ORDS",
+            "description": "User Authentication for ORDS",
+            "publisheddate": "09/01/2020",
+            "filename": "./authentication/authentication.md"
+        },
+        {
+            "title": "Lab 6: Submit Form Data using ORDS",
+            "description": "Submit Form Data using ORDS",
+            "publisheddate": "09/01/2020",
+            "filename": "./post/post.md"
+        }
+    ]
+}

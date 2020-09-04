@@ -110,6 +110,3 @@ Now you are ready to upload the public key to the Oracle Database Cloud Server w
 - **Last Updated By/Date** - Valentin Leonard Tabacaru, Principal Product Manager, DB Product Management, May 2020
 
 See an issue? Please open up a request [here](https://github.com/oracle/learning-library/issues). Please include the workshop name and lab in your request.
-
-
-id_rsa
