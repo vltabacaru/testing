@@ -4,6 +4,8 @@
 
 This Getting Started guide will get you ready for the Oracle Autonomous JSON Database (AJD) Workshop labs. This workshop and the labs that follow support either Windows clients or Linux clients.
 
+![](./images/AJD-WS.jpg "")
+
 ## Workshop Requirements
 
 * Access to Oracle Cloud Infrastructure
