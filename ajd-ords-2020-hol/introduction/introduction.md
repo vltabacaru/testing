@@ -6,6 +6,8 @@ This Getting Started guide will get you ready for the Oracle Autonomous JSON Dat
 
 ![](./images/AJD-WS.jpg "")
 
+Oracle Autonomous JSON Database is a cloud document database service that makes it simple to develop JSON-centric applications. It features simple document APIs, serverless scaling, high performance ACID transactions, comprehensive security, and low pay-per-use pricing. Autonomous JSON Database automates provisioning, configuring, tuning, scaling, patching, encrypting, and repairing of databases, eliminating database management and delivering 99.995% availability.
+
 ## Workshop Requirements
 
 * Access to Oracle Cloud Infrastructure
