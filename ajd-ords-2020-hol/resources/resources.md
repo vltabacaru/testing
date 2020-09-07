@@ -18,7 +18,7 @@ Oracle cloud console URL: [https://console.eu-frankfurt-1.oraclecloud.com](https
 
 Wikidata is part of the non-profit, multilingual, free-content Wikimedia family. The data in Wikidata is published under the Creative Commons Public Domain Dedication 1.0, allowing the reuse of the data in many different scenarios. You can copy, modify, distribute and perform the data, even for commercial purposes, without asking for permission.
 
-Let’s go through a simple example demonstrating how to get a list of all known cats in the world. Use the Cloud Shell on OCI to run the following **curl** command.
+Let’s go through a simple example demonstrating how to get a list of all known cats in the world, information available on [Wikidata:WikiProject Cat breeds](https://www.wikidata.org/wiki/Wikidata:WikiProject_Cat_breeds). Use the Cloud Shell on OCI to run the following **curl** command. 
 
 ![](./images/cloudShell.jpg "")
 
@@ -168,7 +168,7 @@ PL/SQL procedure successfully completed.
 The `DBMS_NETWORK_ACL_ADMIN` package provides the interface to administer the network Access Control List (ACL). Grant the **http**, **connect** and **resolve** privileges for host **query.wikidata.org** to DEMO user.
 
 ````
-begin
+BEGIN
   DBMS_NETWORK_ACL_ADMIN.append_host_ace (
     host       => 'query.wikidata.org',
     ace        => xs$ace_type(privilege_list => xs$name_list('http','connect','resolve'),

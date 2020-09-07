@@ -281,7 +281,7 @@ BEGIN
   apex_web_service.g_request_headers(1).value := 'application/x-www-form-urlencoded'; 
   
   apex_web_service.g_request_headers(2).name := 'Authorization';
-  apex_web_service.g_request_headers(2).value := 'Bearer DPBFgP-sRl_Wup-AbZ3SHw';
+  apex_web_service.g_request_headers(2).value := 'Bearer ' || vcToken;
   
   apex_web_service.oauth_set_token(p_token => vcToken);
   
