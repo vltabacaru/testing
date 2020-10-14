@@ -206,6 +206,8 @@ yum -y update sqldeveloper.noarch
 
 yum -y localinstall https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
+yum -y update sqldeveloper.noarch
+
 sed -i 's/max_bpp=24/max_bpp=128\nuse_compression=yes/g' /etc/xrdp/xrdp.ini
 
 systemctl enable xrdp
@@ -255,6 +257,8 @@ Default JDK not found
 Type the full pathname of a JDK installation (or Ctrl-C to quit), the path will be stored in /home/oracle/.sqldeveloper/19.4.0/product.conf
 /usr/java/jdk-12.0.2
 ````
+
+You will receive a warning message that Java JDK is older than the recommended version for this SQL Developer. In order to save time, we will skip Java update for now.
 
 Once JDK installation full pathname is set, SQL Developer can be started from **Applications** main menu, and **Programming**.
 
