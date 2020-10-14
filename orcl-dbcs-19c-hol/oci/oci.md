@@ -90,7 +90,7 @@ ssh -C -i id_rsa -L 3389:localhost:3389 opc@<Compute Public IP Address>
 
 #### SSH Connection From a Windows Client
 
-Connect to <Compute Public IP Address> port 22.
+Connect to Compute Public IP Address port 22.
 
 ![](./images/putty1.png "")
 
