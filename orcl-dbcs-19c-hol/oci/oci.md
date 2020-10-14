@@ -80,11 +80,31 @@ Click on hamburger menu ≡, then Compute > **Instances**. Click **[Your Initial
 
 Click on hamburger menu ≡, then **Bare Metal, VM, and Exadata**. Click **[Your Initials]-DB** DB System. On the DB System Details page, copy Host Domain Name in your notes. In the table below, copy Database Unique Name in your notes. Click **Nodes** on the left menu, and copy Private IP Address in your notes.
 
+#### SSH Connection From a Linux Client
+
 Connect to the Compute node using SSH. In OpenSSH, local port forwarding is configured using the -L option. Use this option to forward any connection to port 3389 on the local machine to port 3389 on your Compute node.
 
 ````
 ssh -C -i id_rsa -L 3389:localhost:3389 opc@<Compute Public IP Address>
 ````
+
+#### SSH Connection From a Windows Client
+
+Connect to <Compute Public IP Address> port 22.
+
+![](./images/putty1.png "")
+
+Use the id_rsa.ppk private key.
+
+![](./images/putty2.png "")
+
+![](./images/putty3.png "")
+
+Create a SSH tunnel from source port 5001 to localhost:3389.
+
+![](./images/putty4.png "")
+
+#### DB Connection Using SQL*Plus
 
 Try to connect to your DB System database using SQL*Plus.
 
@@ -182,6 +202,8 @@ yum -y groupinstall "Server with GUI"
 
 yum -y install xrdp tigervnc-server terminus-fonts terminus-fonts-console cabextract
 
+yum -y update sqldeveloper.noarch
+
 yum -y localinstall https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
 sed -i 's/max_bpp=24/max_bpp=128\nuse_compression=yes/g' /etc/xrdp/xrdp.ini
@@ -213,6 +235,10 @@ Run the script and check that all goes well.
 ````
 
 Use Microsoft Remote Desktop to open a connection to **localhost**. When asked about username and password, use **oracle** and **DBlearnPTS#20_**.
+
+If you are using Putty on Windows, connect to **localhost:5001**.
+
+![](./images/putty5.png "")
 
 After setting your language and keyboard layout, open a Terminal window using **Right-Click** and **Open Terminal**. Check if your keyboard works. If you need to select another keyboard layout, click the **On-Off** button in the upper right corner, and **Settings** button. You will find the options under Region & Language.
 
