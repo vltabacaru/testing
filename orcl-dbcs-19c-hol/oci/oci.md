@@ -250,12 +250,12 @@ From the Terminal window, launch SQL Developer.
 sqldeveloper 
 ````
 
-It will ask for the full pathname of a JDK installation. This should be available in folder **/usr/java**.
+It will ask for the full pathname of a JDK installation. This should be available in folder **/usr/java**. Type **/usr/java/latest** when asked.
 
 ````
 Default JDK not found
 Type the full pathname of a JDK installation (or Ctrl-C to quit), the path will be stored in /home/oracle/.sqldeveloper/19.4.0/product.conf
-/usr/java/jdk-12.0.2
+/usr/java/latest
 ````
 
 You will receive a warning message that Java JDK is older than the recommended version for this SQL Developer. In order to save time, we will skip Java update for now.
