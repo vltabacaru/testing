@@ -1,4 +1,4 @@
-# Oracle Autonomous JSON Database (AJD) Workshop
+# Using REST and APEX with Autonomous JSON Database
 
 ## Workshop Overview
 

@@ -2,7 +2,7 @@
     "tutorials": [
         {
             "title": "Introduction",
-            "description": "Oracle Autonomous JSON Database (AJD) Workshop",
+            "description": "Using REST and APEX with Autonomous JSON Database",
             "publisheddate": "09/01/2020",
             "filename": "./introduction/introduction.md"
         },
