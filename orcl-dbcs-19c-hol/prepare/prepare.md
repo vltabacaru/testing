@@ -245,7 +245,7 @@ Open the unzipped folder.
 cd db-sample-schemas-19c
 ````
 
-Run this Perl command to replace **__SUB__CWD__** tag in all scripts with your current working directory, so all embedded paths to match your working directory path.
+Run this Perl command to replace `__SUB__CWD__` tag in all scripts with your current working directory, so all embedded paths to match your working directory path.
 
 ````
 perl -p -i.bak -e 's#__SUB__CWD__#'$(pwd)'#g' *.sql */*.sql */*.dat

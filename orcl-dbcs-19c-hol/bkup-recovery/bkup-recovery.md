@@ -54,7 +54,7 @@ Click the database name link **[Your Initials]DB** in the bottom table called Da
 
 Review the backup called **Automatic Backup** in the bottom table called Backups. Click **Create Backup** button. Call it Manual-Backup, and click **Create Backup** to confirm. The new backup is added to the Backups table, having the State: Creating...
 
-Access Work Requests table, and click **Create Database Backup**. Review all Resources: Log Messages (2), Error Messages (0), Associated Resources (2). Wait until this work request is 100% Complete. Under Associated Resources, click **DBS001** database name link.
+Access Work Requests table, and click **Create Database Backup**. Review all Resources: Log Messages (2), Error Messages (0), Associated Resources (2). Wait until this work request is 100% Complete. Under Associated Resources, click **[Your Initials]DB** database name link.
 
 At this point you can see the Manual-Backup on Backups table is now Active.
 
@@ -68,7 +68,7 @@ Write down the Started and Ended times for backup called **Automatic Backup** in
 
 Up on Database Details page, click **Restore** button. Set field **Restore to the timestamp** to the next possible value after your Automatic Backup Ended field - e.g. 10:00 UTC. Click **Restore Database** to confirm.
 
-Access Work Requests table, and click **Restore Database** having Status: In Progress... Review all Resources: Log Messages (2), Error Messages (0), Associated Resources (1). Wait until this work request is 100% Complete. Under Associated Resources, click **DBS001** database name link.
+Access Work Requests table, and click **Restore Database** having Status: In Progress... Review all Resources: Log Messages (2), Error Messages (0), Associated Resources (1). Wait until this work request is 100% Complete. Under Associated Resources, click **[Your Initials]DB** database name link.
 
 Connect again to the database instance specified by environment variables.
 
