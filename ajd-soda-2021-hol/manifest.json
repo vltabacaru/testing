@@ -9,7 +9,7 @@
         {
             "title": "Introduction",
             "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
-            "filename": "../../introduction/intro-soda.md"
+            "filename": "./introduction/intro-soda.md"
         },
         {
             "title": "Lab 1: Build Python application using SODA and JSON",
