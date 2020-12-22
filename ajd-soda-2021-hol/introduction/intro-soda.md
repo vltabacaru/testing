@@ -70,7 +70,7 @@ In this lab, you will:
 4. Connect to the Compute node using SSH. In OpenSSH, local port forwarding is configured using the -L option. Use this option to forward any connection to port 3389 on the local machine to port 3389 on your Compute node. (Mac/Linux only)
 
     ````
-    ssh -C -i id_rsa -L 3389:localhost:3389 opc@<Compute Public IP Address>
+    ssh -C -i id_rsa -L 3389:localhost:3389 opc@[ClientVM Public IP Address]
     ````
 
 5. Connect to the Compute node using SSH Connection From a Windows Client. Connect to Compute Public IP Address port 22. (Windows only)
@@ -275,7 +275,7 @@ One of the objectives of this workshop is to show the integration of Oracle Auto
 6. Click Connect Your Application: Python 3.6 or later. You will receive a connection string like this:
 
     ````
-    mongodb+srv://mongoUser:<password>@cluster_name.dsbwl.mongodb.net/<dbname>?retryWrites=true&w=majority
+    mongodb+srv://mongoUser:[password]@cluster_name.dsbwl.mongodb.net/[dbname]?retryWrites=true&w=majority
     ````
 
     Save this string in your notes.
