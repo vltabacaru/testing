@@ -1,4 +1,4 @@
-# JSON SODA in Oracle Autonomous JSON Database (AJD) using Python
+# SODA in Oracle Autonomous JSON Database (AJD) using Python
 
 ## Introduction
 
@@ -290,10 +290,10 @@ The client credentials Wallet_AJD-NAME.zip that you download contains the follow
     cat /home/oracle/Wallet_[Your Initials]-AJD/tnsnames.ora
     ````
 
-7. Verify the connectivity using SQL*Plus, using the TP service. If the connection works, exit SQL*Plus.
+7. Verify the connectivity using SQL*Plus, using the TP service. If the connection works, exit.
 
     ````
-    sqlplus demo/DBlearnPTS#20_@[ajd-name]_tp
+    sqlplus demo/DBlearnPTS#21_@[ajd-name]_tp
 
     exit
     ````
@@ -383,7 +383,7 @@ The client credentials Wallet_AJD-NAME.zip that you download contains the follow
     export MONGO_DB_NAME=SimpleDatabase
     export TNS_ADMIN=/home/oracle/Wallet_[Your Initials]-AJD
     export ORCL_DB_USER=demo
-    export ORCL_DB_PASS=DBlearnPTS#20_
+    export ORCL_DB_PASS=DBlearnPTS#21_
     export ORCL_DB_SERV=[ajd-name]_tp
     ````
 

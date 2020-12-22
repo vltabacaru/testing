@@ -132,7 +132,7 @@ For some of the labs we need graphical user interface, and this can be achieved 
 
     systemctl start xrdp
 
-    echo -e "DBlearnPTS#20_\nDBlearnPTS#20_" | passwd oracle
+    echo -e "DBlearnPTS#21_\nDBlearnPTS#21_" | passwd oracle
 
     sed -i -e 's/^/#/' /etc/profile.d/oracle-instantclient18.5.sh
 
@@ -163,7 +163,7 @@ For some of the labs we need graphical user interface, and this can be achieved 
 
     ![](./images/putty5.png "")
 
-9. When asked about username and password, use **oracle** and **DBlearnPTS#20_**.
+9. When asked about username and password, use **oracle** and **DBlearnPTS#21_**.
 
 10. After setting your language and keyboard layout, open a Terminal window using **Right-Click** and **Open Terminal**. Check if your keyboard works. If you need to select another keyboard layout, click the **On-Off** button in the upper right corner, and **Settings** button. You will find the options under Region & Language.
 
@@ -183,7 +183,7 @@ For some of the labs we need graphical user interface, and this can be achieved 
 
 2. Under Create administrator credentials:
 
-- Password: DBlearnPTS#20_
+- Password: DBlearnPTS#21_
 
 3. Under Choose network access:
 
@@ -193,19 +193,19 @@ For some of the labs we need graphical user interface, and this can be achieved 
 
 5. On Tools tab, under Oracle Application Express, click **Open APEX**. On Administration Services login page, use password for ADMIN.
 
-- Password: DBlearnPTS#20_
+- Password: DBlearnPTS#21_
 
 6. Click **Sing In to Administration**. Click **Create Workspace**.
 
 - Database User: DEMO
-- Password: DBlearnPTS#20_
+- Password: DBlearnPTS#21_
 - Workspace Name: DEMO
 
 7. Click **Create Workspace**. Click AD on upper right corner, **Sign out**. Click **Return to Sign In Page**.
 
 - Workspace: demo
 - Username: demo
-- Pasword: DBlearnPTS#20_
+- Pasword: DBlearnPTS#21_
 
 8. Click **Sign In**. Oracle APEX uses low-code development to let you build data-driven apps quickly without having to learn complex web technologies. This also gives you access to Oracle REST Data Services, that allows developers to readily expose and/or consume RESTful Web Services by defining REST end points.
 
@@ -216,7 +216,7 @@ For some of the labs we need graphical user interface, and this can be achieved 
 10. Use ADMIN user credentials to login.
 
 - Username: admin
-- Password: DBlearnPTS#20_
+- Password: DBlearnPTS#21_
 
 11. On SQL Dev Web Worksheet as ADMIN user, run the following code:
 
@@ -249,7 +249,7 @@ For some of the labs we need graphical user interface, and this can be achieved 
 13. Click **ADMIN** upper right corner, and **Sign Out**. Login using DEMO user credentials.
 
 - Username: demo
-- Password: DBlearnPTS#20_
+- Password: DBlearnPTS#21_
 
 14. Save in your notes the URL of SQL Developer Web for DEMO user, by changing '**admin**' with '**demo**' in the URL you saved for ADMIN user:
 
