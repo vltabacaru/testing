@@ -8,11 +8,11 @@ Estimated Lab Time: 60 minutes
 
 ### Objectives
 In this lab, you will:
-* Create the blockchain table
-* Insert and delete rows
-* Drop the blockchain table
-* View blockchain tables hidden columns
-* Check the validity of rows in the blockchain table
+* Create Python application
+* Use SODA for Python with Oracle Autonomous JSON Database
+* Insert JSON documents in MongoDB and AJD using REST calls
+* Retrieve JSON documents from MongoDB and AJD
+* Migrate JSON documents from MongoDB to AJD
 
 ### Prerequisites
 * OCI resources (Introduction)
