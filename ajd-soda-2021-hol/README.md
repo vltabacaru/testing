@@ -31,4 +31,5 @@ Click here to request your trial account: https://cloud.oracle.com/tryit
 ## Learn More about Oracle Database Cloud Service
 
 - [Autonomous JSON Database](https://docs.oracle.com/en/cloud/paas/autonomous-json-database/ajdug/autonomous-json-database.html)
+- [SODA for Python](https://docs.oracle.com/en/database/oracle/simple-oracle-document-access/python/index.html)
 

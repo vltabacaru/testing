@@ -1,4 +1,4 @@
-# SODA for Python
+# SODA for Python Workshop Introduction
 
 ## Introduction
 
@@ -8,428 +8,281 @@ You can use SODA for Python to perform create, read (retrieve), update, and dele
 
 SODA is a set of NoSQL-style APIs that let you create and store collections of documents (in particular JSON) in Oracle Database, retrieve them, and query them, without needing to know Structured Query Language (SQL) or how the documents are stored in the database.
 
-Estimated Lab Time: 30 minutes
+Estimated Lab Time: 60 minutes
 
 ### Objectives
 In this lab, you will:
-* Create the blockchain table
-* Insert and delete rows
-* Drop the blockchain table
-* View blockchain tables hidden columns
-* Check the validity of rows in the blockchain table
+* Create network and compute resources on Oracle Cloud
+* Prepare cloud infrastructure for development
+* Provision Oracle Autonomous JSON Database
+* Create MongoDB document store on MongoDB Cloud
 
 ### Prerequisites
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-* Lab 1: Create SSH Keys
-* Lab 2: Create an OCI VM Database
+* SSH Keys for Putty or OpenSSH (id_rsa.ppk or id_rsa, and id_rsa.pub)
 
-## **STEP 1:** Create Database User
 
-1. Connect to PDB1 pluggable database as SYSTEM user.
+## **STEP 1:** Create Virtual Cloud Network (VCN)
 
-    ````
-    $  sqlplus system/WElcome123##@Hostname-Prefix:1521/pdb1.Host-Domain-Name
-    ````
+1. Login to Oracle cloud console using the URL: [https://console.eu-frankfurt-1.oraclecloud.com](https://console.eu-frankfurt-1.oraclecloud.com)
 
-    **Hostname Prefix** and **Host Domain Name** values can be found on Database System details page, under Network.
+- Tenant: oci-tenant
+- Username: oci-username
+- Password: oci-password
 
-2. Create the OOE user, owner of the blockchain table.
+2. Click on main menu ≡, then Networking > **Virtual Cloud Networks**. Select your Region and Compartment assigned by the instructor. 
 
-    Users require no special privileges to create and work with blockchain tables or JSON data type. A simple user will do the job just fine. As a best practice, you can create a specific tablespace for storing JSON documents, but for this simple case we will use the existing one.
+3. Click **Start VCN Wizard**.
 
-	````
-	create user ooe identified by "WElcome123##" default tablespace USERS quota unlimited on USERS;
-	````
+4. Select **VCN with Internet Connectivity**. Start VCN Wizard.
 
-	````
-	GRANT connect, resource TO ooe;
-	````
+- VCN Name: [Your Initials]-VCN (e.g. VLT-VCN)
+- Compartment: [Your Compartment]
 
-3. Connect to PDB1 pluggable database as OOE user.
+5. Click Next and Create.
 
-    The rest of the scenario is executed by OOE user we just created.
+6. Click **[Your Initials]-VCN** for details. 
 
-	````
-	conn ooe/WElcome123##@Hostname-Prefix:1521/pdb1.Host-Domain-Name
-	````
+7. Click **Public Subnet-[Your Initials]-VCN**. Click **Default Security List for [Your Initials]-VCN**. Click **Add Ingress Rules**.
 
-4. Some formatting for SQL*Plus will help me understand the output better. Hit Enter one more time after pasting these lines.
+- CIDR Block: 0.0.0.0/0
+- Destination Port Range: 5000
+- Description: Python Flask
 
-	````
-	set linesize 130
-	set serveroutput on
-	set pages 9999
-	set long 90000
-	column table_name format a40
-	column order_doc format a40
-	column name format a40
-	column shipTo format a40
-	````
+8. Click **Save Changes**.
 
-## **STEP 2:** Create the blockchain table
 
-We got bored of the old fashion relational table orders. We can create a new orders table, that is smart, secure, and cool at the same time. This table uses the new identity column type for the primary key (new in 12c), native JSON data type that allows our application to make changes in the order document at any time (e.g. adding new fields, separating billing from shipping addresses, etc.), and a special sequencing & algorithm (SHA-2 512-bit cryptographic hash) used to chain and validate rows making it tamper-resistant.
+## **STEP 2:** Provision Compute Node for development
 
-- `NO DROP` is used to specify the retention period for the table after no new inserts;
-- `NO DELETE` is used to set the retention period for rows;
-- `HASHING USING`, and `VERSION` clauses are mandatory in a `CREATE BLOCKCHAIN TABLE` statement. 
+1. Click on main menu ≡, then Compute > **Instances**. Click **Create Instance**.
 
-1. In our case, orders blockchain table cannot be dropped if the newest row is less than 60 days old, and rows cannot be deleted until 16 days after the most recent row was added.
+- Name: [Your Initials]-ClientVM (e.g. VLT-ClientVM)
+- Image or operating system: Change Image > Oracle Images > Oracle Cloud Developer Image
+- Virtual cloud network: [Your Initials]-VCN
+- Subnet: Public Subnet
+- Assign a public IP address
+- Add SSH keys: Choose SSH key files > id_rsa.pub
+
+2. Click **Create**. Wait for Compute Instance to finish provisioning, and have status Available.
+
+3. Click **[Your Initials]-ClientVM** Compute instance. On the Instance Details page, copy Public IP Address in your notes.
+
+4. Connect to the Compute node using SSH. In OpenSSH, local port forwarding is configured using the -L option. Use this option to forward any connection to port 3389 on the local machine to port 3389 on your Compute node. (Mac/Linux only)
 
     ````
-    CREATE BLOCKCHAIN TABLE orders
-    ( order_id NUMBER GENERATED BY DEFAULT ON NULL AS IDENTITY
-        MINVALUE 1 MAXVALUE 9999999999999999999999999999
-        INCREMENT BY 1 START WITH 1 CACHE 20 NOT NULL ENABLE,
-      order_doc JSON,
-      created DATE,
-      created_by VARCHAR2(20),
-      currency VARCHAR2(3),
-      channel VARCHAR2(20),
-      CONSTRAINT orders_pk PRIMARY KEY (order_id)
-        USING INDEX ENABLE
-    )
-    NO DROP UNTIL 60 DAYS IDLE
-    NO DELETE UNTIL 16 DAYS AFTER INSERT
-    HASHING USING "SHA2_512" VERSION "v1";
+    ssh -C -i id_rsa -L 3389:localhost:3389 opc@<Compute Public IP Address>
     ````
 
-2. On top of that, this table saves the date when each order is created, and the database user that created that order.
+5. Connect to the Compute node using SSH Connection From a Windows Client. Connect to Compute Public IP Address port 22. (Windows only)
+
+    ![](./images/putty1.png "")
+
+6. Use the id_rsa.ppk private key. (Windows only)
+
+    ![](./images/putty2.png "")
+
+    ![](./images/putty3.png "")
+
+7. Create a SSH tunnel from source port 5001 to localhost:3389. (Windows only)
+
+    ![](./images/putty4.png "")
+
+
+## **STEP 3:** Configure Compute Node for development
+
+For some of the labs we need graphical user interface, and this can be achieved using a Remote Desktop connection.
+
+1. Use the substitute user command to start a session as **root** user.
 
     ````
-    CREATE OR REPLACE EDITIONABLE TRIGGER orders_bi
-        before insert on orders
-        for each row
-    begin
-        :new.created := SYSDATE;
-        :new.created_by := SYS_CONTEXT('USERENV','SESSION_USER');
-        if :new.currency is null then
-            :new.currency := 'USD';
-        end if;
-    end;
+    sudo su -
+    ````
+
+2. Create a new script that will install and configure all the components required for the Remote Desktop connection.
+
+    ````
+    vi xRDP_config.sh
+    ````
+
+3. Press **i** to insert text, and paste the following lines:
+
+    ````
+    #!/bin/bash
+
+    yum -y groupinstall "Server with GUI"
+
+    yum -y install xrdp tigervnc-server terminus-fonts terminus-fonts-console cabextract
+
+    yum -y update sqldeveloper.noarch
+
+    yum -y localinstall https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+
+    yum -y update sqldeveloper.noarch
+
+    sed -i 's/max_bpp=24/max_bpp=128\nuse_compression=yes/g' /etc/xrdp/xrdp.ini
+
+    systemctl enable xrdp
+
+    firewall-cmd --permanent --add-port=3389/tcp
+    firewall-cmd --permanent --add-port=5000/tcp
+    firewall-cmd --reload
+
+    chcon --type=bin_t /usr/sbin/xrdp
+    chcon --type=bin_t /usr/sbin/xrdp-sesman
+
+    systemctl start xrdp
+
+    echo -e "DBlearnPTS#20_\nDBlearnPTS#20_" | passwd oracle
+
+    sed -i -e 's/^/#/' /etc/profile.d/oracle-instantclient18.5.sh
+
+    printf "\nORACLE_HOME=/opt/oracle/product/19c/dbhome_1\nLD_LIBRARY_PATH=\$ORACLE_HOME/lib\nPATH=\$PATH:\$ORACLE_HOME/bin\nexport ORACLE_HOME LD_LIBRARY_PATH PATH\n" >> /etc/profile
+    ````
+
+4. Press **Esc**, type **:wq** and hit **Enter** to save the file and close. Make this script executable.
+
+    ````
+    chmod u+x xRDP_config.sh 
+    ````
+
+5. Run the script and check that all goes well.
+
+    ````
+    ./xRDP_config.sh
+    ````
+
+6. Close session as **root** user.
+
+    ````
+    exit
+    ````
+
+7. Use Microsoft Remote Desktop to open a connection to **localhost**. (Mac/Linux only)
+
+8. If you are using Putty on Windows, connect to **localhost:5001**. (Windows only)
+
+    ![](./images/putty5.png "")
+
+9. When asked about username and password, use **oracle** and **DBlearnPTS#20_**.
+
+10. After setting your language and keyboard layout, open a Terminal window using **Right-Click** and **Open Terminal**. Check if your keyboard works. If you need to select another keyboard layout, click the **On-Off** button in the upper right corner, and **Settings** button. You will find the options under Region & Language.
+
+## **STEP 4:** Provision Oracle Autonomous JSON Database (AJD)
+
+1. Click on main menu ≡, then **Autonomous JSON Database** under Oracle Database. **Create Autonomous Database**.
+
+- Select a compartment: [Your Compartment]
+- Display name: [Your Initials]-AJD (e.g. VLT-AJD)
+- Database name: [Your Initials]AJD (e.g. VLTAJD)
+- Choose a workload type: JSON
+- Choose a deployment type: Shared Infrastructure
+- Choose database version: 19c
+- OCPU count: 1
+- Storage (TB): 1
+- Auto scaling: enabled
+
+2. Under Create administrator credentials:
+
+- Password: DBlearnPTS#20_
+
+3. Under Choose network access:
+
+- Access Type: Allow secure access from everywhere
+
+4. Click **Create Autonomous Database**. Wait for Lifecycle State to become Available.
+
+5. On Tools tab, under Oracle Application Express, click **Open APEX**. On Administration Services login page, use password for ADMIN.
+
+- Password: DBlearnPTS#20_
+
+6. Click **Sing In to Administration**. Click **Create Workspace**.
+
+- Database User: DEMO
+- Password: DBlearnPTS#20_
+- Workspace Name: DEMO
+
+7. Click **Create Workspace**. Click AD on upper right corner, **Sign out**. Click **Return to Sign In Page**.
+
+- Workspace: demo
+- Username: demo
+- Pasword: DBlearnPTS#20_
+
+8. Click **Sign In**. Oracle APEX uses low-code development to let you build data-driven apps quickly without having to learn complex web technologies. This also gives you access to Oracle REST Data Services, that allows developers to readily expose and/or consume RESTful Web Services by defining REST end points.
+
+9. On Oracle Cloud Infrastrucuture Console, on Tools tab, under SQL Developer Web, click **Open SQL Developer Web**. Copy the URL from browser in your notes:
+
+    https://kndl0dsxmmt29t1-vltajd.adb.eu-frankfurt-1.oraclecloudapps.com/ords/admin/_sdw/?nav=worksheet
+
+10. Use ADMIN user credentials to login.
+
+- Username: admin
+- Password: DBlearnPTS#20_
+
+11. On SQL Dev Web Worksheet as ADMIN user, run the following code:
+
+    ````
+    BEGIN 
+       ords_admin.enable_schema (
+          p_enabled => TRUE,
+          p_schema => 'DEMO',
+          p_url_mapping_type => 'BASE_PATH',
+          p_url_mapping_pattern => 'demo',
+          p_auto_rest_auth => NULL
+       ) ;
+      commit ;
+    END ; 
     /
     ````
 
-3. Enable this trigger.
+    >**Note** : For all code you run in SQL Developer Web, make sure you receive a success message:
 
     ````
-    ALTER TRIGGER orders_bi ENABLE;
+    PL/SQL procedure successfully completed.
     ````
 
-## **STEP 3:** View Blockchain Table Details
-
-1. Describe the blockchain tables owned by the current OOE user with this query.
+12. Grant **SODA_APP** to DEMO user. This role provides privileges to use the SODA APIs, in particular, to create, drop, and list document collections.
 
     ````
-    SELECT * FROM USER_BLOCKCHAIN_TABLES;
-
-    TABLE_NAME       ROW_RETENTION ROW TABLE_INACTIVITY_RETENTION HASH_ALG
-    ---------------- ------------- --- -------------------------- --------
-    ORDERS                      16 NO                          60 SHA2_512
+    GRANT SODA_APP TO demo;
     ````
 
-2. We can modify, more exactly increase, the retention period for a blockchain table and for rows within a blockchain table, but never decrease. Modify the definition of orders blockchain table so rows cannot be deleted until 31 days after they were created. By adding a `LOCKED` clause we indicate that this setting can never be modified.
+13. Click **ADMIN** upper right corner, and **Sign Out**. Login using DEMO user credentials.
+
+- Username: demo
+- Password: DBlearnPTS#20_
+
+14. Save in your notes the URL of SQL Developer Web for DEMO user, by changing '**admin**' with '**demo**' in the URL you saved for ADMIN user:
+
+    https://kndl0dsxmmt29t1-vltajd.adb.eu-frankfurt-1.oraclecloudapps.com/ords/demo/_sdw/?nav=worksheet
+
+
+## **STEP 5:** Deploy Atlas document store on MongoDB Cloud
+
+One of the objectives of this workshop is to show the integration of Oracle Autonomous JSON Database with existing document stores like MongoDB. This is why you need an existing MongoDB database, and if you don't have one, you can provision it quickly on MondoDB Cloud.
+
+1. Access MongoDB Cloud at [https://cloud.mongodb.com](https://cloud.mongodb.com), and create an account. You can login using your Google account.
+
+2. Create a new Cluster using the default settings.
+
+3. Once your Cluster is up and running, on the overview page, click Connect.
+
+4. Click Add a Different IP Address, and use the Public IP address of your ClientVM Compute Node.
+
+5. Create a Database User: mongoUser/DBlearnPTS#21_
+
+    Save the username and the password in your notes.
+
+6. Click Connect Your Application: Python 3.6 or later. You will receive a connection string like this:
 
     ````
-    ALTER TABLE orders NO DELETE UNTIL 31 DAYS AFTER INSERT LOCKED;
+    mongodb+srv://mongoUser:<password>@cluster_name.dsbwl.mongodb.net/<dbname>?retryWrites=true&w=majority
     ````
 
-3. Review again blockchain tables details.
+    Save this string in your notes.
 
-    ````
-    SELECT * FROM USER_BLOCKCHAIN_TABLES;
+7. Under Collections, use Load a Sample Dataset wizard to generate some JSON documents for different use cases in your MongoDB database. Navigate these sample datasets and familiarize yourself with JSON documents, if this is your first experience.
 
-    TABLE_NAME       ROW_RETENTION ROW TABLE_INACTIVITY_RETENTION HASH_ALG
-    ---------------- ------------- --- -------------------------- --------
-    ORDERS                      31 YES                         60 SHA2_512
-    ````
-
-## **STEP 4:** Insert Records in Blockchain Table
-
-1. JSON native data type automatically validates the format, and does not require a IS JSON check constraint like in previous Oracle versions.
-
-    ````
-    INSERT INTO orders (order_doc) VALUES ('++{} "This is not a valid", "JSON" ::; "document !"');
-
-    ORA-40441: JSON syntax error
-    ````
-
-2. Insert some valid rows into the table.
-
-    ````
-    INSERT INTO orders (order_doc, currency) VALUES (
-    '{ "name"  : "Joe Bravo",
-      "sku"    : "5",
-      "price"  : 23.95,
-      "shipTo" : { "name" : "Eva Bravo",
-                  "address" : "Via Calimala, 23",
-                  "city" : "Firenze",
-                  "country" : "IT",
-                  "zip"  : "50123" },
-      "billTo" : { "name" : "Joe Bravo",
-                  "address" : "Via Calimala, 23",
-                  "city" : "Firenze",
-                  "country" : "IT",
-                  "zip"  : "50123" }
-    }',
-    'EUR');
-    ````
-
-3. And another valid row.
-
-    ````
-    INSERT INTO orders (order_doc, channel) VALUES (
-    '{ "name"  : "Carmen Flores",
-      "sku"    : "8",
-      "price"  : 199.95,
-      "shipTo" : { "name" : "Mario Flores",
-                  "address" : "Gran Via, 25",
-                  "city" : "Salamanca",
-                  "country" : "ES",
-                  "zip"  : "37001" },
-      "billTo" : { "name" : "Carmen Flores",
-                  "address" : "Gran Via, 25",
-                  "city" : "Salamanca",
-                  "country" : "ES",
-                  "zip"  : "37001" }
-    }',
-    'online');
-    ````
-
-4. JSON documents can be inserted in any shape as long as we keep the structure, we don't have to use a clear human readable shape.
-
-    ````
-    INSERT INTO orders (order_doc, currency, channel) VALUES ('{ "name" : "Francis Picard", "sku" : "10", "price" : 65.95, "shipTo" : { "name" : "Maria Picard", "address" : "25 Avenue Jean Jaures", "city" : "Lyon", "country" : "FR", "zip"  : "69007" }, "billTo" : { "name" : "Francis Picard", "address" : "25 Avenue Jean Jaures", "city" : "Lyon", "country" : "FR", "zip"  : "69007" }}', 'EUR', 'direct');
-    ````
-
-5. Commit all three valid rows.
-
-    ````
-    COMMIT;
-    ````
-
-## **STEP 5:** Retrieve Records from Blockchain Table
-
-1. As you can see, all JSON documents in the orders table have the same shape, even though we inserted the first two in a clear format, and the last one as a continuous string.
-
-    ````
-    SELECT * FROM orders;
-
-    ORDER_ID ORDER_DOC                                CREATED   CREATED_BY  CUR CHANNEL
-    -------- ---------------------------------------- --------- ----------- --- -------
-           2 {"name":"Joe Bravo","sku":"5","price":23 04-JUN-20 OOE         EUR
-             .95,"shipTo":{"name":"Eva Bravo","addres
-             s":"Via Calimala, 23","city":"Firenze","
-             country":"IT","zip":"50123"},"billTo":{"
-             name":"Joe Bravo","address":"Via Calimal
-             a, 23","city":"Firenze","country":"IT","
-             zip":"50123"}}
-
-           3 {"name":"Carmen Flores","sku":"8","price 04-JUN-20 OOE         USD online
-             ":199.95,"shipTo":{"name":"Mario Flores"
-             ,"address":"Gran Via, 25","city":"Salama
-             nca","country":"ES","zip":"37001"},"bill
-             To":{"name":"Carmen Flores","address":"G
-             ran Via, 25","city":"Salamanca","country
-             ":"ES","zip":"37001"}}
-
-           4 {"name":"Francis Picard","sku":"10","pri 04-JUN-20 OOE         EUR direct
-             ce":65.95,"shipTo":{"name":"Maria Picard
-             ","address":"25 Avenue Jean Jaures","cit
-             y":"Lyon","country":"FR","zip":"69007"},
-             "billTo":{"name":"Francis Picard","addre
-             ss":"25 Avenue Jean Jaures","city":"Lyon
-             ","country":"FR","zip":"69007"}}
-    ````
-
-2. There are ways of retrieving the information in a clear human readable format.
-
-    ````
-    SELECT o.order_id,
-      JSON_SERIALIZE(o.order_doc PRETTY) order_doc,
-      to_char(created, 'HH24:MM:SS DD-MON-YY') created
-    FROM orders o;
-
-      ORDER_ID ORDER_DOC                                CREATED
-    ---------- ---------------------------------------- ------------------
-             2 {                                        18:06:48 04-JUN-20
-                 "name" : "Joe Bravo",
-                 "sku" : "5",   
-                 "price" : 23.95,
-                 "shipTo" :
-                 {
-                   "name" : "Eva Bravo",
-                   "address" : "Via Calimala, 23",
-                   "city" : "Firenze",
-                   "country" : "IT",
-                   "zip" : "50123"
-                 },
-                 "billTo" :
-                 {
-                   "name" : "Joe Bravo",
-                   "address" : "Via Calimala, 23",
-                   "city" : "Firenze",
-                   "country" : "IT",
-                   "zip" : "50123"
-                 }
-               }
-
-              3 {                                        18:06:59 04-JUN-20
-                 "name" : "Carmen Flores",
-                 "sku" : "8",
-                 "price" : 199.95,
-                 "shipTo" :
-                 {
-                   "name" : "Mario Flores",
-                   "address" : "Gran Via, 25",
-                   "city" : "Salamanca",
-                   "country" : "ES",
-                   "zip" : "37001"
-                  },
-                 "billTo" :
-                 {
-                   "name" : "Carmen Flores",
-                   "address" : "Gran Via, 25",
-                   "city" : "Salamanca",
-                   "country" : "ES",
-                   "zip" : "37001"
-                 }
-               }
-
-             4 {                                        18:06:11 04-JUN-20
-                 "name" : "Francis Picard",
-                 "sku" : "10",
-                 "price" : 65.95,
-                 "shipTo" :
-                 {
-                   "name" : "Maria Picard",
-                   "address" : "25 Avenue Jean Jaures",
-                   "city" : "Lyon",
-                   "country" : "FR",
-                   "zip" : "69007"
-                 },
-                 "billTo" :
-                 {
-                   "name" : "Francis Picard",
-                   "address" : "25 Avenue Jean Jaures",
-                   "city" : "Lyon",
-                   "country" : "FR",
-                   "zip" : "69007"
-                 }
-               }
-    ````
-
-3. We can even retrieve individual fields from the orders stored as JSON documents.
-
-    ````
-    SELECT o.order_id, o.order_doc."name", o.order_doc."shipTo"."address" FROM orders o;
-
-      ORDER_ID name                                     shipTo
-    ---------- ---------------------------------------- -----------------------
-             2 "Joe Bravo"                              "Via Calimala, 23"
-             3 "Carmen Flores"                          "Gran Via, 25"
-             4 "Francis Picard"                         "25 Avenue Jean Jaures"
-    ````
-
-## **STEP 6:** Permitted Operations on Blockchain Tables
-
-However, we cannot update rows, delete rows, truncate or drop the blockchain table. We cannot even drop the tablespace containing a blockchain table (go ahead and try it, but connecting with SYSDBA privileges).
-
-1. Try to delete rows from `ORDERS` blockchain table.
-
-    ````
-    DELETE FROM orders WHERE order_id > 2;
-
-    ORA-05715: operation not allowed on the blockchain table
-    ````
-
-2. Try to truncate `ORDERS` blockchain table.
-
-    ````
-    TRUNCATE TABLE orders;
-
-    ORA-05715: operation not allowed on the blockchain table
-    ````
-
-3. Try to update a row in `ORDERS` blockchain table.
-
-    ````
-    UPDATE orders SET currency = 'GBP' WHERE order_id > 2;
-
-    ORA-05715: operation not allowed on the blockchain table
-    ````
-
-4. Try to drop `ORDERS` blockchain table.
-
-    ````
-    DROP TABLE orders;
-
-    ORA-05723: drop blockchain table ORDERS not allowed
-    ````
-
-## **STEP 7:** Blockchain Tables Hidden Columns
-
-For management purposes it is important to understand the hidden columns in blockchain tables. Here are a few of them: 
-
-- `ORABCTAB_INST_ID$` is the database instance ID;
-- `ORABCTAB_CHAIN_ID$` represents the ID of the chain with values between 0 and 31;
-- `ORABCTAB_USER_NUMBER$` is the ID of the database user who inserted the row;
-- `ORABCTAB_HASH$` contains the hash value of the row computed based on current row content and hash value of the previous row.
-
-1. Hash values on your table will be different from the ones in the example, because these are unique. Same may be true for the database instance ID and the ID of the database user in your database, these values ay have different values from the example.
-
-    ````
-    SELECT o.order_id, o.order_doc."name", ORABCTAB_INST_ID$, ORABCTAB_CHAIN_ID$, ORABCTAB_USER_NUMBER$, ORABCTAB_HASH$ FROM orders o;
-
-      ORDER_ID name                                     ORABCTAB_INST_ID$ ORABCTAB_CHAIN_ID$ ORABCTAB_USER_NUMBER$
-    ---------- ---------------------------------------- ----------------- ------------------ ---------------------
-    ORABCTAB_HASH$
-    ----------------------------------------------------------------------------------------------------------------------------------
-             2 "Joe Bravo"                              1                 12                 113
-    ACC12150F672BA9E5491EADE2C290BA2EB4AD23B3F13D2C919015B0D2633CCCAC035241ED4019329DC445969B0B8488704F2A7DD08C090C0A454A1252E458553
-             3 "Carmen Flores"                          1                 12                 113
-    93F697F51245F7AD4778328D891F04F1432896B244B915A803AFBD9178BDA6388AC1792CB2B64C631F11D419AB64620A40CB3D470CD54926BAD85B554A55BB03
-             4 "Francis Picard"                         1                 12                 113
-    9018522AFA8E50A3CB477FD110F333F18EBBB1B46733E472ADCC8429D4170A3D6E3607B70722764C63B1E9D93876079EC718D5A064CCF91670CC9609EDB8DE36
-    ````
-
-2. It is easy to verify `ORABCTAB_USER_NUMBER$` for example.
-
-    ````
-    select SYS_CONTEXT('USERENV','SESSION_USERID') from dual;
-
-    SYS_CONTEXT('USERENV','SESSION_USERID')
-    -----------------------------------------------------------------------
-    113
-    ````
-
-## **STEP 8:** Validate Records in Blockchain Table
-
-Last but not least, I want to mention the `DBMS_BLOCKCHAIN_TABLE` package that can be used to manage records in blockchain tables. Some of the tasks we can perform are: 
-
-- Delete rows that are beyond the retention period;
-- Sign a row you inserted after it is added to a chain; 
-- Verify the hashes and signatures on rows. 
-
-1. Here is a simple example of verifying or validating a row. Use the value of `ORABCTAB_INST_ID$` hidden column for **instance_id** variable.
-
-    ````
-    DECLARE
-      verify_rows NUMBER;
-      instance_id NUMBER;
-    BEGIN
-      instance_id := 1;
-      DBMS_BLOCKCHAIN_TABLE.VERIFY_ROWS('OOE','ORDERS', NULL, NULL, instance_id, NULL, verify_rows);
-      DBMS_OUTPUT.PUT_LINE(' Number of rows verified in instance Id '|| instance_id || ' = '|| verify_rows);
-    END;
-    /
-
-    Number of rows verified in instance Id 1 = 3
-    ````
-
-    All rows in your `ORDERS` table should be verified as valid.
-
-You may now [proceed to the next lab](#next).
+8. Click Create Database, and name it SimpleDatabase, and the collection SimpleCollection. This will be used for our Python application development in the next lab.
 
 
 ## Acknowledgements
