@@ -206,8 +206,6 @@ yum -y update sqldeveloper.noarch
 
 yum -y localinstall https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
 
-yum -y update sqldeveloper.noarch
-
 sed -i 's/max_bpp=24/max_bpp=128\nuse_compression=yes/g' /etc/xrdp/xrdp.ini
 
 systemctl enable xrdp
