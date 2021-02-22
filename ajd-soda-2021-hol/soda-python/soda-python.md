@@ -64,13 +64,7 @@ In this lab, you will:
     dnspython
     ````
 
-7. Install dependencies.
-
-    ````
-    pip install -r requirements.pip
-    ````
-
-8. Start developing the document store application. Here are the main sections, just look at the code, do not copy or execute anything now. The first section imports the required modules for the application.
+7. Start developing the document store application. Here are the main sections, just look at the code, do not copy or execute anything now. The first section imports the required modules for the application.
 
     ````
     import os
@@ -81,7 +75,7 @@ In this lab, you will:
     app = Flask(__name__)
     ````
 
-9. Using **os** module we can retrieve the connection details for MongoDB from the operating system environment variables.
+8. Using **os** module we can retrieve the connection details for MongoDB from the operating system environment variables.
 
     ````
     usr = os.environ['MONGO_DB_USER']
@@ -89,7 +83,7 @@ In this lab, you will:
     dbn = os.environ['MONGO_DB_NAME']
     ````
 
-10. This section builds the connection string, defines the connection, and the collection used by the application. Use the information from Introduction STEP 5.6 to build your MongoDB connection string.
+9. This section builds the connection string, defines the connection, and the collection used by the application. Use the information from Introduction STEP 5.6 to build your MongoDB connection string.
 
     ````
     client = pymongo.MongoClient("mongodb+srv://" + usr + ":" + pwd + "@cluster_name.dsbwl.mongodb.net/" + dbn + "?retryWrites=true&w=majority")
@@ -97,7 +91,7 @@ In this lab, you will:
     collection = db['SimpleCollection']
     ````
 
-11. Use the `route()` decorator to tell Flask what URL should trigger our function called `insert_mongo_doc` that is used to insert new JSON documents in the document store.
+10. Use the `route()` decorator to tell Flask what URL should trigger our function called `insert_mongo_doc` that is used to insert new JSON documents in the document store.
 
     ````
     @app.route("/", methods=['POST'])
@@ -107,7 +101,7 @@ In this lab, you will:
         return ('', 204)
     ````
 
-12. Define another function called `get_mongo_doc` to retrieve JSON documents from the MongoDB document store.
+11. Define another function called `get_mongo_doc` to retrieve JSON documents from the MongoDB document store.
 
     ````
     @app.route('/')
@@ -120,14 +114,14 @@ In this lab, you will:
         return json.dumps(response)
     ````
 
-13. When Python interpreter reads our source file, it defines a special variable called `__name__`. This is the main program module, so it will see that `__name__` variable is set to `'__main__'` value, and it calls the `app.run()` method to run our Flask application.
+12. When Python interpreter reads our source file, it defines a special variable called `__name__`. This is the main program module, so it will see that `__name__` variable is set to `'__main__'` value, and it calls the `app.run()` method to run our Flask application.
 
     ````
     if __name__ == '__main__':
         app.run(host= '0.0.0.0')
     ````
 
-14. Putting together all these sections, here is the code we have in our simple-app.py application file:
+13. Putting together all these sections, here is the code we have in our simple-app.py application file:
 
     ````
     import os
