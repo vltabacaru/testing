@@ -312,8 +312,7 @@ For this simple CICD example, we will capture database changes from the HR sampl
 
 3. Click Connect.
 
-4. Verify HR schema objects. Copy and paste the following query in SQL Developer Worksheet, and click Run Statement ![](./images/run-query.jpg "").
-
+4. Verify HR schema objects. Copy and paste the following query in SQL Developer Worksheet, and click Run Statement ![](./images/run-query.jpg ""){ width=50% }.
 
     ````
     select object_name, object_type from user_objects order by 2,1;
