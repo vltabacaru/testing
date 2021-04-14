@@ -16,7 +16,7 @@ In this lab, you will:
 
 ### Prerequisites
 * An Oracle Free Tier, Always Free, Paid or LiveLabs Cloud Account
-* SSH Keys for Putty or OpenSSH (id_rsa.ppk or id_rsa, and id_rsa.pub)
+* SSH Keys for Putty or OpenSSH (`id_rsa.ppk` or `id_rsa`, and `id_rsa.pub`)
 
 
 ## **STEP 1:** Create Virtual Cloud Network (VCN)
@@ -271,7 +271,7 @@ For this simple CICD example, we will capture database changes from the HR sampl
     perl -p -i.bak -e 's#__SUB__CWD__#'$(pwd)'#g' *.sql */*.sql */*.dat
     ````
 
-5. Go back to the parent folder (this should be /home/oracle).
+5. Go back to the parent folder (this should be `/home/oracle`).
 
     ````
     cd ..
@@ -289,7 +289,7 @@ For this simple CICD example, we will capture database changes from the HR sampl
     sqlplus admin/DBlearnPTS#21_@[lowercase-initials]dev01_tp
     ````
 
-8. Run the HR schema installation script. For more information about [Oracle Database Sample Schemas](https://github.com/oracle/db-sample-schemas) installation process, please follow the link. Make sure to replace **DB Node Private IP Address** and **Host Domain Name** with the actual values.
+8. Run the HR schema installation script. For more information about [Oracle Database Sample Schemas](https://github.com/oracle/db-sample-schemas) installation process, please follow the link.
 
     ````
     @db-sample-schemas-19c/human_resources/hr_main.sql DBlearnPTS#21_ DATA TEMP DBlearnPTS#21_ /home/oracle/logs/ [lowercase-initials]dev01_high
@@ -312,7 +312,7 @@ For this simple CICD example, we will capture database changes from the HR sampl
 
 3. Click Connect.
 
-4. Verify HR schema objects. Copy and paste the following query in SQL Developer Worksheet, and click Run Statement ![](./images/run-query.jpg "").
+4. Verify HR schema objects. Copy and paste the following query in SQL Developer Worksheet, and click Run Statement ![](./images/run-query.jpg "" =).
 
     ````
     select object_name, object_type from user_objects order by 2,1;
