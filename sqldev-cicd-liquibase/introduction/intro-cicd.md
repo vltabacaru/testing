@@ -432,7 +432,7 @@ GitHub uses Git version control systems (VCS) to handle the collaboration workfl
     liquibase --version
     ````
 
-6. Create a properties file in your Git repository folder.
+6. Create a properties file in your GitHub repository folder.
 
     ````
     cd ~/cicd-ws-rep00
@@ -468,9 +468,9 @@ GitHub uses Git version control systems (VCS) to handle the collaboration workfl
     ````
 
 9. We have to make 3 changes:
-- Comment out the oracle.net.wallet_location line. 
-- Use TNS_ADMIN environment variable value in javax.net.ssl.trustStore and javax.net.ssl.keyStore. 
-- Set javax.net.ssl.trustStorePassword and javax.net.ssl.keyStorePassword to the wallet password.
+- Comment out the `oracle.net.wallet_location` line. 
+- Use `TNS_ADMIN` environment variable value in `javax.net.ssl.trustStore` and `javax.net.ssl.keyStore`. 
+- Set `javax.net.ssl.trustStorePassword` and `javax.net.ssl.keyStorePassword` to the wallet password.
 
     ````
     #oracle.net.wallet_location=(SOURCE=(METHOD=FILE)(METHOD_DATA=(DIRECTORY=${TNS_ADMIN})))
