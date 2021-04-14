@@ -2,7 +2,7 @@
 
 Continuous Integration (CI) refers to the practice of frequently merging new software using a single line of code we call master branch. Continuous Delivery (CD) refers to the release of packaged software, modules, or features in frequent cycles. Likewise, Continuous Deployment (CD) refers to the deployment these software packages/modules/features to a production platform in frequent cycles.
 
-Run this hands-on workshop to learn how to capture changes from your Oracle Database using Liquibase community edition, in changelogs and changesets, using SQL Developer.
+Run this hands-on workshop to learn how to capture changes from your Oracle Database using Liquibase community edition, in changelogs and changesets, from SQL Developer Worksheet.
 
 ## Workshop Requirements
 

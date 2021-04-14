@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Before we can start capturing any changes, we need an Oracle Database and a development environment to work on. The fastest way to get an Oracle Database up and running is to provision an Oracle Autonomous Database on Oracle Cloud Infrastructure. In the same way, the easiest way to put your hands on a sandbox with the required tools is to provision a Compute Node using Oracle Cloud Developer Image.
+Before we can start capturing any changes, we need an Oracle Database and a development environment to work on. The fastest way to get an Oracle Database up and running is to provision an Oracle Autonomous Database on Oracle Cloud Infrastructure. In the same way, the easiest way to put your hands on a sandbox with all the development tools necessary for this project, is to provision a Compute Instance using Oracle Cloud Developer Image.
 
 Estimated Lab Time: 60 minutes
 
@@ -11,6 +11,7 @@ In this lab, you will:
 * Create network and compute resources on Oracle Cloud
 * Prepare cloud infrastructure for development
 * Provision Oracle Autonomous Database
+* Update Git client and create a new GutHub repository
 * Install Liquibase on compute node
 
 ### Prerequisites
@@ -40,7 +41,7 @@ In this lab, you will:
 6. Click **[Your Initials]-VCN** for details.
 
 
-## **STEP 2:** Provision Compute Node for development
+## **STEP 2:** Provision Compute node for development
 
 1. Click on main menu ≡, then Compute > **Instances**. Click **Create Instance**.
 
@@ -76,7 +77,7 @@ In this lab, you will:
     ![](./images/putty4.png "")
 
 
-## **STEP 3:** Configure Compute Node for development
+## **STEP 3:** Configure development environment on Compute
 
 For some of the labs we need graphical user interface, and this can be achieved using a Remote Desktop connection.
 
@@ -392,7 +393,7 @@ GitHub uses Git version control systems (VCS) to handle the collaboration workfl
     git config --global credential.helper 'cache --timeout 28800'
     ````
 
-10. Create a new Git repository cicd-ws-rep00, and clone it on your compute node.
+10. Create a new Git repository **cicd-ws-rep00**, and clone it on your compute node.
 
     ````
     cd ~
