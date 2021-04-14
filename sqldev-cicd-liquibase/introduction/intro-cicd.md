@@ -393,7 +393,7 @@ GitHub uses Git version control systems (VCS) to handle the collaboration workfl
     git config --global credential.helper 'cache --timeout 28800'
     ````
 
-10. Create a new Git repository **cicd-ws-rep00**, and clone it on your compute node.
+10. Create a new GitHub repository **cicd-ws-rep00**, and clone it on your compute node.
 
     ````
     cd ~
