@@ -2,13 +2,13 @@
 
 ## Introduction
 
-Capturing changes in an Oracle Database can look complex, however, with a little discipline and organization, this process can be totally effortless and simple.
+Capturing object definition and code changes from an Oracle Database can look complex, however, with a little discipline and organization, this process can be totally effortless and simple. In this hands-on lab 
 
 Estimated Lab Time: 120 minutes
 
 ### Objectives
 In this lab, you will:
-* Add files to your Git repository and push changes
+* Add files to your GitHub repository and push changes
 * Capture initial database schema using Liquibase
 * Save code from database to files and maintain it using Git versions
 * Build Liquibase master changelog to organize the entire project
@@ -63,10 +63,10 @@ In this lab, you will:
 8. Use SQL Developer Connections dialog to open (double-click) all procedures and triggers, and save them as sql files in `database` folder.
 
 9. Use a suffix at the end of the file name, and add a last line with a slash `/` in each file. These files will be added to Git repository, so developers can work on the files for any code changes in this project. There are 4 files you need to create:
-    * add_job_history_proc.sql
-    * secure_dml_proc.sql  
-    * secure_employees_trig.sql  
-    * update_job_history_trig.sql
+    * `add_job_history_proc.sql`
+    * `secure_dml_proc.sql`  
+    * `secure_employees_trig.sql`  
+    * `update_job_history_trig.sql`
 
 10. As an example, the contents of `secure_employees_trig.sql` must be:
 
@@ -265,8 +265,8 @@ In this lab, you will:
     ````
 
 6. As for the initial code, we need to open package and package body in SQL Developer Connections dialog (double-click), and save both as sql scripts in `database` folder:
-    * investment_check_pack.sql
-    * investment_check_packb.sql
+    * `investment_check_pack.sql`
+    * `investment_check_packb.sql`
 
 7. Create manual changelogs for code objects not captured by Liquibase. Paste these lines and click Run Script ![](./images/run-script.jpg "").
 
@@ -405,7 +405,7 @@ In this lab, you will:
     ````
 
 4. Open new trigger `bi_HR_EVENTS` (double-click) and save it as sql script in the `database` folder:
-    * bi_HR_EVENTS_trig.sql
+    * `bi_HR_EVENTS_trig.sql`
 
 5. Create a manual changelogs for trigger code, that is not captured by Liquibase. Run Script ![](./images/run-script.jpg "").
 
