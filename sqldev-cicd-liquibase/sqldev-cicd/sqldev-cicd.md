@@ -1,8 +1,10 @@
-# Capture Oracle Database Changes with Liquibase
+# Capture Oracle Database Changes with Liquibase from SQL Developer
 
 ## Introduction
 
-Capturing object definition and code changes from an Oracle Database can look complex, however, with a little discipline and organization, this process can be totally effortless and simple. In this hands-on lab 
+Capturing object definition and code changes from an Oracle Database can look complex, however, with a little discipline and organization, this process can be totally effortless and simple. 
+
+This scenario is based on the requirement to run all tasks from SQL Developer, so the developer does not have to leave the IDE while working on the requests/tickets received from project manager (logging system).
 
 Estimated Lab Time: 120 minutes
 
@@ -43,7 +45,7 @@ In this lab, you will:
     Password for 'https://[GitHub username]@github.com': [GitHub password]
     ````
 
-4. This is **Developer #1** from your team, that is capturing the current HR schema, from SQL Developer. Use **hr@Dev01ATP** connection in SQL Developer, copy and paste the following lines in Worksheet, and click Run Script ![](./images/run-script.jpg "").
+4. This is **Developer #1** from your team, that is capturing the current **HR** schema, from SQL Developer. Use **hr@Dev01ATP** connection in SQL Developer, copy and paste the following lines in Worksheet, and click Run Script ![](./images/run-script.jpg "").
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
@@ -52,7 +54,7 @@ In this lab, you will:
 
 5. Use Files dialog in SQL Developer to open `initial_changelog.xml` file from `database` folder. It contains objects of types: tables, views, sequences, and constraints.
 
-6. Check object types in HR schema, and the number of object of each type. Run the following statement in SQL Developer ![](./images/run-query.jpg "").
+6. Check object types in **HR** schema, and the number of object of each type. Run the following statement in SQL Developer ![](./images/run-query.jpg "").
 
     ````
     select object_type, count(*) from user_objects group by object_type;
@@ -200,7 +202,7 @@ In this lab, you will:
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
     HOST cd &proj_dir; git add database/*
-    HOST cd &proj_dir; git commit -a -m "Initial HR schema changelog and code"
+    HOST cd &proj_dir; git commit -a -m "Version 1: Initial HR schema changelog and code"
     HOST cd &proj_dir; git push
     ````
 
@@ -254,7 +256,7 @@ In this lab, you will:
 4. Verify your new package function. Click Run Statement ![](./images/run-query.jpg "").
 
     ````
-    SELECT * FROM table(investment_check.get_limits(300000));
+    SELECT * FROM table(investment_check.get_limits(350000));
     ````
 
 5. Generate a changelog with differences between snapshot `Dev1SnapshotV1` and current database. Paste these lines and click Run Script ![](./images/run-script.jpg "").
@@ -387,7 +389,7 @@ In this lab, you will:
     /
     ````
 
-2. **Developer #3** also modifies some objects in this database development environment. Paste these lines in SQL Developer and click Run Script ![](./images/run-script.jpg "").
+3. **Developer #3** also modifies some objects in this database development environment. Paste these lines in SQL Developer and click Run Script ![](./images/run-script.jpg "").
 
     ````
     ALTER TRIGGER  "bi_HR_EVENTS" ENABLE;
@@ -397,24 +399,24 @@ In this lab, you will:
     ALTER TABLE employees ADD comments CLOB;
     ````
 
-3. Generate a changelog with differences between snapshot Dev2SnapshotV2 and current database environment. Run Script ![](./images/run-script.jpg "").
+4. Generate a changelog with differences between snapshot `Dev2SnapshotV2` and current database environment. Run Script ![](./images/run-script.jpg "").
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
     HOST cd &proj_dir; liquibase --referenceUrl=jdbc:oracle:thin:@testcicd_high?TNS_ADMIN=/home/oracle/Wallet_testCICD --referenceUsername=hr --referencePassword=DBlearnPTS#21_ --url=offline:oracle?snapshot=database/Dev2SnapshotV2.json --changeLogFile=database/hr-events.xml --changeSetAuthor="Developer3" diffChangeLog
     ````
 
-4. Open new trigger `bi_HR_EVENTS` (double-click) and save it as sql script in the `database` folder:
+5. Open new trigger `bi_HR_EVENTS` (double-click) and save it as sql script in the `database` folder:
     * `bi_HR_EVENTS_trig.sql`
 
-5. Create a manual changelogs for trigger code, that is not captured by Liquibase. Run Script ![](./images/run-script.jpg "").
+6. Create a manual changelogs for trigger code, that is not captured by Liquibase. Run Script ![](./images/run-script.jpg "").
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
     HOST cd &proj_dir; touch database/HR_EVENTS_trig-code.xml
     ````
 
-6. Open HR_EVENTS_trig-code.xml changelog in SQL Developer, and add the following lines:
+7. Open HR_EVENTS_trig-code.xml changelog in SQL Developer, and add the following lines:
 
     ````
     <?xml version="1.1" encoding="UTF-8"?> 
@@ -434,7 +436,7 @@ In this lab, you will:
     </databaseChangeLog>
     ````
 
-7. Update master changelog to include the last changes added by **Developer #3**.
+8. Update master changelog to include the last changes added by **Developer #3**.
 
     ````
     <?xml version="1.1" encoding="UTF-8"?> 
@@ -461,28 +463,28 @@ In this lab, you will:
     </databaseChangeLog>
     ````
 
-8. Mark the last changes as deployed in the local development database. Run Script ![](./images/run-script.jpg "").
+9. Mark the last changes as deployed in the local development database. Run Script ![](./images/run-script.jpg "").
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
     HOST cd &proj_dir; liquibase changeLogSync
     ````
 
-9. Verify changes recorded in `DATABASECHANGELOG` table, and check last changes added by **Developer #3**. Run Statement ![](./images/run-query.jpg "").
+10. Verify changes recorded in `DATABASECHANGELOG` table, and check last changes added by **Developer #3**. Run Statement ![](./images/run-query.jpg "").
 
     ````
     select ID, AUTHOR, FILENAME, orderexecuted ORD, DESCRIPTION, TAG, EXECTYPE 
       from DATABASECHANGELOG order by 4 desc;
     ````
 
-10. Generate a new snapshot called `Dev3SnapshotV3`.
+11. Generate a new snapshot called `Dev3SnapshotV3`.
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
     HOST cd &proj_dir; liquibase --outputFile=database/Dev3SnapshotV3.json snapshot --snapshotFormat=json
     ````
 
-11. Add last changes to your Git development repository.
+12. Add last changes to your Git development repository.
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
@@ -491,7 +493,7 @@ In this lab, you will:
     HOST cd &proj_dir; git push
     ````
 
-12. On GitHub, click on **cicd-ws-rep00** link in the breadcrumbs at the top of the page. On the right side, under Releases, click Create a new release. Create a Release called '**Version 3 production**', use Tag version '**V3**'. Click **Publish release**.
+13. On GitHub, click on **cicd-ws-rep00** link in the breadcrumbs at the top of the page. On the right side, under Releases, click Create a new release. Create a Release called '**Version 3 production**', use Tag version '**V3**'. Click **Publish release**.
 
 
 ## **STEP 5:** Working on patch that changes columns in table
@@ -516,7 +518,7 @@ In this lab, you will:
     alter table PROSPECTS add CREDIT_LIMIT NUMBER;
     ````
 
-4. Generate a changelog with differences between snapshot Dev3SnapshotV3 and current database, to capture changes required for this patch. Run Script ![](./images/run-script.jpg "").
+4. Generate a changelog with differences between snapshot `Dev3SnapshotV3` and current database, to capture changes required for this patch. Run Script ![](./images/run-script.jpg "").
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
@@ -531,7 +533,7 @@ In this lab, you will:
     ...
       <include file="./hr-drop_phones.xml" relativeToChangelogFile="true"/>
       <changeSet  author="Developer1"  id="tagDatabase-tk001">  
-        <tagDatabase  tag="ticket_001"/>  
+        <tagDatabase  tag="version_3.1"/>  
       </changeSet>
     </databaseChangeLog>
     ````
@@ -587,7 +589,7 @@ In this lab, you will:
 
 3. Perform code fixes. Open `investment_check_packb.sql` using Files dialog in SQL Developer, and change '`3*SAVINGS`' with '`2.5*SAVINGS`' in that for loop select statement.
 
-4. Run Script ![](./images/run-script.jpg "") and Save ![](./images/save.jpg "").
+4. Use Run Script ![](./images/run-script.jpg "") to perform the change into the database, and Save ![](./images/save.jpg "").
 
 5. Open `bi_HR_EVENTS_trig.sql` using Files dialog in SQL Developer, and add a second if condition:
 
@@ -608,7 +610,7 @@ In this lab, you will:
 
 6. Run Script ![](./images/run-script.jpg "") and Save ![](./images/save.jpg "").
 
-7. Generate a changelog with differences between snapshot Dev1SnapshotV3t1 and current database. Run Script ![](./images/run-script.jpg "").
+7. Generate a changelog with differences between snapshot `Dev1SnapshotV3t1` and current database. Run Script ![](./images/run-script.jpg "").
 
     ````
     define proj_dir="../home/oracle/cicd-ws-rep00"
@@ -661,7 +663,7 @@ In this lab, you will:
 
 4. Click **Create Autonomous Database**. Wait for Lifecycle State to become Available.
 
-5. Download and unzip the client credentials `Wallet_[Your Initials]Dev05.zip` file, selecting instance wallet file, on the ClientVM. If you use the Firefox browser on the Remote Desktop connection, it will be downloaded in folder `/home/oracle/Downloads/`.
+5. Download and unzip the client credentials `Wallet_[Your Initials]Dev02.zip` file, selecting instance wallet file, on the ClientVM. If you use the Firefox browser on the Remote Desktop connection, it will be downloaded in folder `/home/oracle/Downloads/`.
 
 6. Specify a wallet password.
 
@@ -833,11 +835,9 @@ In this lab, you will:
 
 15. Open `hr-ATPdev01_ATPdev02.xml` in SQL Developer using Files dialog. This changelog is empty because there are no object differences between ATPdev01 and ATPdev02 development environments.
 
-16. Clean up OCI environment by terminating all resources:
+16. Clean up OCI environment by terminating Autonomous Database resources:
     * ATPdev01 database **[Your Initials]-Dev01**
     * ATPdev02 database **[Your Initials]-Dev02**
-    * Compute instance **[Your Initials]-ClientVM**
-    * VCN **[Your Initials]-VCN**
 
 
 ## Acknowledgements
