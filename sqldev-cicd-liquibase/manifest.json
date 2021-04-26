@@ -19,7 +19,7 @@
         {
             "title": "Lab: Capture Database Changes with Liquibase from SQLcl",
             "description": "This lab shows how easy it is to capture changes in Oracle Database using Liquibase, from SQLcl command line, and push them to your GitHub repository.",
-            "filename": "./sqldev-cicd/sqlcl-cicd.md"
+            "filename": "./sqlcl-cicd/sqlcl-cicd.md"
         }
         
     ]
