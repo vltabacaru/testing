@@ -23,7 +23,7 @@ In this lab, you will:
 
 ## **STEP 1:** Verify SQLcl and update if necessary
 
-1. On Oracle Cloud Developer Image you used for the compute node there is SQLcl installed in folder `/opt/oracle/sqlcl`, however it is necessary to update to version 19.2 or superior. Download SQLcl latest version from [SQLcl Downloads](https://www.oracle.com/tools/downloads/sqlcl-downloads.html).
+1. On Oracle Cloud Developer Image you used for the compute node there is SQLcl installed in folder `/opt/oracle/sqlcl`, however it is necessary to update to version 19.2 or superior. Download the latest version from [SQLcl Downloads](https://www.oracle.com/tools/downloads/sqlcl-downloads.html).
 
 2. Unzip the downloaded package into the existing folder. When asked, replace all files with the new version.
 
@@ -772,8 +772,6 @@ In this lab, you will:
     GRANT UNLIMITED TABLESPACE TO HR;
 
     GRANT create view to HR;
-
-    exit
     ````
 
 11. Connect to the **ATPdev02** ATP service as **HR** user.
