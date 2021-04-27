@@ -93,7 +93,7 @@ In this lab, you will:
 
     > **Note** : Organize these pieces in the master changelog. As a best practice, I place objects changelogs first and code changelogs after, because code may depend on the objects created by the same developer as one piece (in the same sprint).
 
-2. Open `hr-master.xml` in SQL Developer using Files dialog, and add the following contents:
+2. Open `hr-master.xml` in SQL Developer using Files dialog, and add the following contents, to inlcude just the initial **HR** schema changelog:
 
     ````
     <?xml version="1.1" encoding="UTF-8"?> 
@@ -115,7 +115,7 @@ In this lab, you will:
     HOST cd &proj_dir; touch database/hr-initial-code.xml
     ````
 
-4. Open `hr-initial-code.xml` in SQL Developer, and add these lines:
+4. This changelog includes the 4 SQL scripts with code changes saved at previous step. Open `hr-initial-code.xml` in SQL Developer, and add these lines:
 
     ````
     <?xml version="1.1" encoding="UTF-8"?> 
@@ -416,7 +416,7 @@ In this lab, you will:
     HOST cd &proj_dir; touch database/HR_EVENTS_trig-code.xml
     ````
 
-7. Open HR_EVENTS_trig-code.xml changelog in SQL Developer, and add the following lines:
+7. Add contentes to the manual changelogs for trigger code. Open HR_EVENTS_trig-code.xml changelog in SQL Developer, and add the following lines:
 
     ````
     <?xml version="1.1" encoding="UTF-8"?> 
