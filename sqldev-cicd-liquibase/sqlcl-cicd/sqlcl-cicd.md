@@ -70,6 +70,10 @@ In this lab, you will:
 
 1. Create a new folder for database changes in your project main folder, for the first version of your project.
 
+    > **Note** : Creating a separate folder for your versions and subversions is optional. It may be useful to keep individual changelogs for all objects you change and capture in each one of the versions and subversions. At the same time, you will have to create a new folder. If you have yearly major releases (v.21) and monthly subversions (v.21.4), every month you will create a new subfolder in your project main folder.
+
+    > You can rely on your Git repository to manage your releases (versions and subversions), and save all changelog files in your project main folder. Once an object is modified, and changes are captured, the chagelog in the project main folder is overwritten.
+
     ````
     cd ~/cicd-ws-rep00
 
