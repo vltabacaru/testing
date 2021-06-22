@@ -6,7 +6,7 @@ Unlike relational data, JSON data can be stored, indexed, and queried without an
     
 Oracle Database queries are declarative. You can join JSON data with relational data. And you can project JSON data relationally, making it available for relational processes and tools. You can also query, from within the database, JSON data that is stored outside the database in an external table.
     
-## Step 1: Split JSON array in single entries 
+## **Step 1:** Split JSON array in single entries 
     
 1. You may have noticed the big JSON document lists all cats in the world using a JSON array. At the time this lab was created there were 144 cats in the list. You can split that array into individual JSON documents describing one cat using `JSON_TABLE` function.
     
@@ -105,7 +105,7 @@ Oracle Database queries are declarative. You can join JSON data with relational 
     select ID, json_serialize(JSON_DOCUMENT pretty) document from "Cats"
     ````
     
-## Step 2: Retrieve individual fields from JSON documents
+## **Step 2:** Retrieve individual fields from JSON documents
     
 1. Select one document to view the fields.
     
@@ -156,7 +156,7 @@ Oracle Database queries are declarative. You can join JSON data with relational 
     ...
     ````
     
-## Step 3: Join JSON fields with relational data
+## **Step 3:** Join JSON fields with relational data
     
 1. Create a new table that will be used to store relational structured data.
     

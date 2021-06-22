@@ -11,7 +11,7 @@ These are the two kinds of authentication supported by RESTful Services:
 - First Party Authentication. This is authentication intended to be used by the party who created the RESTful Service, enabling an APEX application to easily consume a protected RESTful Service. The application must be located with the RESTful Service, i.e. it must be located in the same Oracle Application Express workspace. The application must use the standard Oracle Application Express authentication.
 - Third Party Authentication. This is authentication intended to be used by third party applications not related to the party who created the RESTful Service. Third party authentication relies on the OAuth 2.0 protocol.
     
-## Step 1: Create new ORDS service with authentication
+## **Step 1:** Create new ORDS service with authentication
     
 1. Open SQL Developer Web on Tools tab, and login to AJD as DEMO user.
     
@@ -100,7 +100,7 @@ These are the two kinds of authentication supported by RESTful Services:
     
 10. Same message will be received.
     
-## Step 2: Authenticate to new ORDS service with token
+## **Step 2:** Authenticate to new ORDS service with token
     
 1. Open SQL Developer Web on Tools tab, and login to AJD as DEMO user. Retrieve your OAuth client registration details from `USER_ORDS_CLIENTS` view. These fields are required to request an authentication token for the client.
     
@@ -179,7 +179,7 @@ These are the two kinds of authentication supported by RESTful Services:
     
 7. We need to add some extra steps to our PL/SQL code for the authentication.
     
-## Step 3: Use authentication token in PL/SQL to retrieve data
+## **Step 3:** Use authentication token in PL/SQL to retrieve data
     
 1. Connect to the web service and access the JSON document store **catfood** collection from AJD with authentication. `APEX_WEB_SERVICE.OAUTH_AUTHENTICATE` procedure performs OAUTH autentication and requests an OAuth access token. `APEX_WEB_SERVICE.OAUTH_GET_LAST_TOKEN` function returns the OAuth access token received in the last `OAUTH_AUTHENTICATE` call. Returns NULL when the token is already expired or `OAUTH_AUTHENTICATE` has not been called.  
     

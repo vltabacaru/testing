@@ -6,7 +6,7 @@ The `UTL_HTTP` package makes Hypertext Transfer Protocol (HTTP) callouts from SQ
     
 When the package fetches data from a Web site using HTTPS, it requires Oracle Wallet Manager which can be created by either Oracle Wallet Manager or the orapki utility. Non-HTTPS fetches do not require an Oracle wallet. 
     
-## Step 1: Retrieve query results from Wikidata
+## **Step 1:** Retrieve query results from Wikidata
     
 1. Login SQL Deveveloper Web as DEMO user. Use the existing browser tab, or a direct link. For the direct link, use SQL Developer Web link copied from browser in the previous section, and change 'admin' with 'demo'.
     
@@ -55,7 +55,7 @@ When the package fetches data from a Web site using HTTPS, it requires Oracle Wa
     
 5. Our code will retrieve a JSON document with a list of all known cats in the world, however it is incomplete because the `UTL_HTTP.READ_TEXT` buffer is smaller than the document.
     
-## Step 2: Retrieve JSON document line by line
+## **Step 2:** Retrieve JSON document line by line
     
 1. For big JSON documents, it is a good idea to retrieve them line by line, using a loop cycle. In this case we print the lines in the loop cycle as they are retrieved.
     
@@ -143,7 +143,7 @@ When the package fetches data from a Web site using HTTPS, it requires Oracle Wa
     
 3. In the second case, the entire document has all line breaks removed, but they are not important.
     
-## Step 3: Insert documents in collections
+## **Step 3:** Insert documents in collections
     
 1. Once we have the entire JSON document in a local buffer, we can store it in our collection. Create a new collection called MYJSON. Use SODA APIs to create this new document collection.
     
@@ -188,7 +188,7 @@ When the package fetches data from a Web site using HTTPS, it requires Oracle Wa
     Json String inserted successfully.
     ````
     
-## Step 4: Retrieve documents from collections
+## **Step 4:** Retrieve documents from collections
     
 1. JSON documents can be retrieved with SODA APIs using query-by-example. This method allows you to specify some fields in the document, and will return all documents matching those fields.
     
@@ -226,7 +226,7 @@ When the package fetches data from a Web site using HTTPS, it requires Oracle Wa
     select ID, json_serialize(JSON_DOCUMENT pretty) document from MYJSON;
     ````
     
-## Step 5: Insert big JSON document in collection
+## **Step 5:** Insert big JSON document in collection
     
 1. SODA APIs can be used also from PL/SQL to create, drop, and list document collections. Also to insert documents in collections. We have changes the last part of our precedure to insert that big JSON document retrieved from Wikidata into MYJSON collection.
     

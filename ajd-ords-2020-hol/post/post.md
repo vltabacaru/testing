@@ -6,7 +6,7 @@ The POST method is similar. This method is used by the client to communicate wit
     
 Oracle RESTful Data Services supports POST as the HTTP method. In POST method, input parameters are encoded in the payload and output parameters are decoded from the response. You can use JSON in the body of REST requests, such as the POST or PUT method, where each parameter is a JSON name/value pair.
     
-## Step 1: Create table and new module for POST
+## **Step 1:** Create table and new module for POST
     
 1. Open SQL Developer Web on Tools tab, and login to AJD as DEMO user.
     
@@ -111,7 +111,7 @@ Oracle RESTful Data Services supports POST as the HTTP method. In POST method, i
     
 19. Copy Full URL value https://kndl0dsxmmt29t1-vltajd.adb.eu-frankfurt-1.oraclecloudapps.com/ords/demo/auth-cats/orders/ in your notes.
     
-## Step 2: Use POST method to submit orders
+## **Step 2:** Use POST method to submit orders
     
 1. Let's submit some orders from ADW into AJD using this new POST method. Open SQL Developer Web on Tools tab, and login to ADW as ADMIN user.
     
@@ -194,7 +194,7 @@ Oracle RESTful Data Services supports POST as the HTTP method. In POST method, i
     END;
     ````
     
-## Step 3: Secure POST method with authentication
+## **Step 3:** Secure POST method with authentication
     
 1. Add authentication to the new web service to secure this POST method.
     

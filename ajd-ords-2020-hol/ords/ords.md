@@ -6,7 +6,7 @@ Oracle REST Data Services (ORDS) bridges HTTPS and your Oracle Database. A mid-t
     
 Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data service that provides enhanced security, file caching features, and RESTful Web Services. Oracle REST Data Services also increases flexibility through support for deployment in standalone mode, as well as using servers like Oracle WebLogic Server and Apache Tomcat. 
     
-## Step 1: Register schema with ORDS
+## **Step 1:** Register schema with ORDS
     
 1. On Tools tab, under Oracle Application Express, click **Open APEX**.
     
@@ -37,7 +37,7 @@ Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data serv
     
 8. At this moment, no authentication is required to retrieve data via ORDS. Click **oracle.example.hr** under Modules. Review Resource Templates Protected by Privilege column: Template not protected by any privilege.
     
-## Step 2: Create a new ORDS module
+## **Step 2:** Create a new ORDS module
     
 1. Create a new ORDS module to provide remote access to our Pet Shop data via REST APIs. Click Modules. Click **Create Module**.
     
@@ -71,7 +71,7 @@ Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data serv
     
 9. If JSON documents are displayed correctly in your browser, it means ORDS works and your new Pet Shop module is ready.
     
-## Step 3: Provision ADW to be used as client
+## **Step 3:** Provision ADW to be used as client
     
 1. Login to OCI Console, to create a new Autonomous Data Warehouse (ADW) instance. Click on hamburger menu ≡, then **Autonomous Data Warehouse** under Oracle Database. **Create Autonomous Database**.
     
@@ -106,7 +106,7 @@ Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data serv
     - Username: admin
     - Password: DBlearnPTS#20_
     
-## Step 4: Create ACL for ADMIN to Catfood
+## **Step 4:** Create ACL for ADMIN to Catfood
     
 1. Your new ADW instance requires an Access Control List (ACL) to be able to connect to your AJD instance via HTTP (or HTTPS). If you omit this step, you will receive the following error:
     
@@ -127,7 +127,7 @@ Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data serv
     /
     ````
     
-## Step 5: Retrieve AJD Catfood records via REST
+## **Step 5:** Retrieve AJD Catfood records via REST
     
 1. From ADW, send a request to AJD to provide Catfood records via REST.
     
@@ -376,7 +376,7 @@ Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data serv
     WhiskersSnacks","cat_id":"15D421E3FC164F11BFAEAE0D83178C95"}
     ````
 
-## Step 6: Store first 10 records from AJD locally on ADW
+## **Step 6:** Store first 10 records from AJD locally on ADW
     
 1. Create a table called `CATFOOD_R` in ADW to store data retrieved from AJD.
     
@@ -437,7 +437,7 @@ Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data serv
     select * from CATFOOD_R;
     ````
     
-## Step 7: Read all records from AJD via REST
+## **Step 7:** Read all records from AJD via REST
     
 1. Now we can read all pages and insert data into `CATFOOD_R` table. This procedure verifies if there is a next page link, and if true, it makes new requests in a loop, until no next page is retrieved.
     
