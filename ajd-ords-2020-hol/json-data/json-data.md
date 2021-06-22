@@ -5,6 +5,8 @@
 Unlike relational data, JSON data can be stored, indexed, and queried without any need for a schema that defines the data. Oracle Database supports JSON natively with relational database features, including transactions, indexing, declarative querying, and views.
     
 Oracle Database queries are declarative. You can join JSON data with relational data. And you can project JSON data relationally, making it available for relational processes and tools. You can also query, from within the database, JSON data that is stored outside the database in an external table.
+
+Estimated Lab Time: 15 minutes
     
 ## **Step 1:** Split JSON array in single entries 
     

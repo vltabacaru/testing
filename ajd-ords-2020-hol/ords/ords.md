@@ -4,7 +4,9 @@
     
 Oracle REST Data Services (ORDS) bridges HTTPS and your Oracle Database. A mid-tier Java application, ORDS provides a Database Management REST API, a web interface for working with your database (SQL Developer Web), the ability to create your own REST APIs, and a PL/SQL Gateway. In addition, ORDS provides a REST interface for your Oracle Database 19c JSON Document Store.
     
-Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data service that provides enhanced security, file caching features, and RESTful Web Services. Oracle REST Data Services also increases flexibility through support for deployment in standalone mode, as well as using servers like Oracle WebLogic Server and Apache Tomcat. 
+Oracle REST Data Services is a Java Enterprise Edition (Java EE) based data service that provides enhanced security, file caching features, and RESTful Web Services. Oracle REST Data Services also increases flexibility through support for deployment in standalone mode, as well as using servers like Oracle WebLogic Server and Apache Tomcat.
+
+Estimated Lab Time: 45 minutes
     
 ## **Step 1:** Register schema with ORDS
     

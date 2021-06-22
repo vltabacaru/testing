@@ -5,6 +5,8 @@
 The POST method is similar. This method is used by the client to communicate with the server when asking for a response that takes into account the data provided in the body of the HTTP request. If a form is sent using this method, the data is appended to the body of the HTTP request.
     
 Oracle RESTful Data Services supports POST as the HTTP method. In POST method, input parameters are encoded in the payload and output parameters are decoded from the response. You can use JSON in the body of REST requests, such as the POST or PUT method, where each parameter is a JSON name/value pair.
+
+Estimated Lab Time: 15 minutes
     
 ## **Step 1:** Create table and new module for POST
     

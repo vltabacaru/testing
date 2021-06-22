@@ -10,6 +10,8 @@ Oracle Autonomous JSON Database is a cloud document database service that makes 
 
 [Whatch the video](https://www.oracle.com/autonomous-database/autonomous-json-database/?bcid=6180289717001)
 
+Estimated Lab Time: 3 hours
+
 ## Workshop Requirements
 
 * Access to Oracle Cloud Infrastructure

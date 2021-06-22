@@ -10,6 +10,8 @@ These are the two kinds of authentication supported by RESTful Services:
     
 - First Party Authentication. This is authentication intended to be used by the party who created the RESTful Service, enabling an APEX application to easily consume a protected RESTful Service. The application must be located with the RESTful Service, i.e. it must be located in the same Oracle Application Express workspace. The application must use the standard Oracle Application Express authentication.
 - Third Party Authentication. This is authentication intended to be used by third party applications not related to the party who created the RESTful Service. Third party authentication relies on the OAuth 2.0 protocol.
+
+Estimated Lab Time: 15 minutes
     
 ## **Step 1:** Create new ORDS service with authentication
     

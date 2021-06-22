@@ -5,6 +5,8 @@
 Wikidata is a central storage repository that can be accessed by others, such as the wikis maintained by the Wikimedia Foundation. The Wikidata repository consists mainly of items, each one having a label, a description and any number of aliases. Items are uniquely identified by a *Q* followed by a number, such as Douglas Adams (Q42). Statements describe detailed characteristics of an Item and consist of a property and a value. Properties in Wikidata have a *P* followed by a number, such as with educated at (P69).
     
 The Wikidata Query Service provides a SPARQL endpoint. SPARQL is an RDF query language, that is, a semantic query language for databases. With SPARQL you can extract any kind of data, with a query composed of logical combinations of triples. RDF is a directed, labeled graph data format for representing information in the Web.
+
+Estimated Lab Time: 60 minutes
     
 ## **Step 1:** Login to OCI Console
     
