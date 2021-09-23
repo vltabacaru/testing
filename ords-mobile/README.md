@@ -14,7 +14,9 @@ Our focus is to show how Oracle REST Data Services (ORDS) can be leveraged and u
 
 ## Access the Labs Using Our Web Interface
 
-**[Click here](https://oracle.github.io/learning-library/data-management-library/autonomous-database/developer/ords-mobile/index.html)** to use our easy to navigate HTML format.
+**[Click here](https://vltabacaru.github.io/testing/ords-mobile/index.html)** to use our easy to navigate HTML format.
+
+[comment]: <> (LiveLabs link: https://oracle.github.io/learning-library/data-management-library/autonomous-database/developer/ords-mobile/index.html)
 
 ## Oracle Cloud Account
 
