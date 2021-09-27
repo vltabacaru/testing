@@ -463,7 +463,7 @@ In this lab, you will:
 
 2. Send Client ID, Client Secret and `alert_web_service` URL values to your mobile phone using notes or your email client. 
 
-3. Launch dbNotify mobile application, choose a username, and copy/paste Client ID, Client Secret and `alert_web_service` URL in the last three fields. Click `Login`.
+3. Launch dbNotify mobile application, choose a user name, and copy/paste Client ID, Client Secret and `alert_web_service` URL in the last three fields. The user name must be short, alphanumeric, and without spaces. Click `Login`.
 
    ![](./images/guide12.jpg "")
 
@@ -477,27 +477,59 @@ In this lab, you will:
 
    ![](./images/guide11.jpg "")
 
-8. When a new message is inserted in `MOBILE_ALERTS` table, this generates an alert on your mobile phone.
+7. When a new message is inserted in `MOBILE_ALERTS` table, this generates an alert on your mobile phone.
 
    ![](./images/guide14.jpg "")
 
-9. Open the alert in dbNotify mobile application.
+8. Open the alert in dbNotify mobile application.
 
    ![](./images/guide15.jpg "")
 
-10. Message is truncated, if you want to see the entire message click view icon on the right (eye icon).
+9. Message is truncated, if you want to see the entire message click view icon on the right (eye icon).
 
    ![](./images/guide18.jpg "")
 
-11. An alert can have three stages: new, accepted, and solved. To accept an alert, click **Accept**.
+10. An alert can have three stages: new, accepted, and solved. To accept an alert, click **Accept**.
 
    ![](./images/guide16.jpg "")
 
-12. After being accepted, to solve an alert, click **Solve**. Once solved, the alert message goes into History.
+11. After being accepted, to solve an alert, click **Solve**. Once solved, the alert message goes into History.
 
    ![](./images/guide17.jpg "")
 
-### Current limitations
+12. It is a good practice to test the web service before using it in application development. The easiest way to do it is with cURL (Client URL). This is a `POST` call to the token endpoint of the ORDS instance using the client credentials retrieves the access token that can be used to perform REST API calls to our protected web service.
+
+    ````
+    curl -i --user dzNFsdDeJS_J-jhADZBqMB..:WL-Dr8Us9lftgdEkf-c6sl.. --data "grant_type=client_credentials" https://xxxx9xxxxxx27x4-adbname.adb.eu-frankfurt-1.oraclecloudapps.com/ords/dbnotify21/oauth/token
+    ````
+
+13. The response has a JSON format containing the access token, the type, and the time this token is valid for in seconds.
+
+    ````
+    {"access_token":"G9xxKxxHxxU99xAx#XXXXX","token_type":"bearer","expires_in":3600}
+    ````
+
+14. Using the access token retrieved, perform a `GET` call to `alert_web_service` module `open_alerts` template to retrieve all unsolved messages in a JSON document that contains an array.
+
+    ````
+    curl -i -H "Authorization: Bearer G9xxKxxHxxU99xAx#XXXXX" https://xxxx9xxxxxx27x4-adbname.adb.eu-frankfurt-1.oraclecloudapps.com/ords/dbnotify21/alerts/open_alerts/
+    ````
+
+15. If you want to change the status of one unaccepted message to `Accepted`, perform a `POST` call to `alert_web_service` module `accept_alert` handler, including two parameters: user name and message ID.
+
+    ````
+    curl -H "Authorization: Bearer G9xxKxxHxxU99xAx#XXXXX" -d "vusername=NotifyUser&vid=1" -X POST https://xxxx9xxxxxx27x4-adbname.adb.eu-frankfurt-1.oraclecloudapps.com/ords/dbnotify21/alerts/accept_alert/
+    ````
+
+16. If you want to change the status of one accepted but unsolved message to `Solved`, perform a `POST` call to `alert_web_service` module `solve_alert` handler, including two parameters: user name and message ID.
+
+    ````
+    curl -H "Authorization: Bearer G9xxKxxHxxU99xAx#XXXXX" -d "vusername=AlertUser&vid=1" -X POST https://xxxx9xxxxxx27x4-adbname.eu-frankfurt-1.oraclecloudapps.com/ords/dbnotify21/alerts/solve_alert/
+    ````
+
+17. At this point, if all previous steps have been completed successfully, you are ready to start developing your own mobile application using your favourite mobile platform and programming language.
+
+### Demo mobile application current limitations
 
 * One dbNotify application can be used per cloud tenancy.
 * Message text is up to 4000 characters long.
