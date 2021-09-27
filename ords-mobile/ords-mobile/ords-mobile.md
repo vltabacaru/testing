@@ -455,7 +455,9 @@ In this lab, you will:
     alert_web_service URL = https://xxxx9xxxxxx27x4-adbname.adb.eu-frankfurt-1.oraclecloudapps.com/ords/dbnotify21/
     ````
 
-   ![](./images/guide10.jpg "")
+    ![](./images/guide10.jpg "")
+
+    >**Note** : `alert_web_service` URL may look too long, however, once you configure APEX instance to use your domain name, this URL looks like `https://your_domain.com/ords/dbnotify21/` and it is easy to remember.
 
 ## Task 3: Use ORDS into dbNotify mobile demo application
 
